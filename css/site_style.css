@@ -179,7 +179,7 @@ body {
 .site-footer a {
     color: #33337C;
     text-decoration: none;
-    margin: 0 5px;
+    margin: 0 0px;
     transition: color 0.2s ease-in-out;
 }
 
