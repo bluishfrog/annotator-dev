@@ -602,10 +602,9 @@ h3 {
 
 /* ---------- AO3 de-layouting ---------- */
 
-#htmlpreview .byline p {
+#htmlpreview .meta p {
     font-weight: 500;
-    margin: 0 0 2em 0;
-    line-height: 1.6;
+    margin: 1.5em 0 0.5em 0;
 }
 
 #htmlpreview .userstuff {
