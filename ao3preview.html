@@ -20,17 +20,19 @@
   <div id="preview-root"></div>
 
   <script>
-    fetch('components/nofileselected.html')
-      .then(response => response.text())
-      .then(html => {
-        // Wrap the Ao3 content inside a div with id "workskin"
-        document.getElementById('preview-root').innerHTML = `<div id="htmlpreview">${html}</div>`;
-      })
-      .catch(err => {
-        document.getElementById('preview-root').innerHTML = '<p style="color:red;">Failed to load preview</p>';
-        console.error(err);
-      });
+    function loadPlaceholder() {
+      fetch('components/nofileselected.html')
+        .then(response => response.text())
+        .then(html => {
+          document.getElementById('preview-root').innerHTML =
+            `<div id="htmlpreview">${html}</div>`;
+        });
+    }
+
+    // default state
+    loadPlaceholder();
   </script>
+
 </body>
 
 </html>
