@@ -356,6 +356,42 @@ body {
     display: block;
 }
 
+
+/* ---------- Responsive Tabs ---------- */
+
+@media (max-width: 700px) {
+
+    .tab-header {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        gap: 0;
+        padding: 10px 10px 0 10px;
+
+        /* smooth scrolling */
+        scroll-behavior: smooth;
+    }
+
+    /* hide scrollbar (clean look) */
+    .tab-header::-webkit-scrollbar {
+        display: none;
+    }
+
+    .tab-header {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    .tab-button {
+        flex: 0 0 auto; /* stop equal stretching */
+        min-width: 160px; /* gives nice tap targets */
+        white-space: nowrap;
+
+        text-align: center;
+    }
+}
+
+
+
 /* ---------- File Actions & Buttons ---------- */
 .file-actions {
     display: flex;
