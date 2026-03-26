@@ -242,19 +242,18 @@ body {
     /* keep logo left + hamburger right */
     .site-nav .nav-content {
         justify-content: space-between;
+        position: relative;
     }
 
     .menu-toggle {
         display: block;
     }
 
-    /* hide separators on mobile */
     .separator {
         display: none;
     }
 
-    /* ---------- Animated dropdown (NO display:none) ---------- */
-
+    /* CLOSED state */
     .nav-links {
         position: absolute;
         top: 100%;
@@ -269,27 +268,28 @@ body {
 
         max-height: 0;
         overflow: hidden;
+
         opacity: 0;
         transform: translateY(-10px);
 
         transition:
             max-height 0.3s ease,
             opacity 0.2s ease,
-            transform 0.2s ease;
+            transform 0.2s ease,
+            padding 0.2s ease;
 
         z-index: 999;
     }
 
-    /* open state */
+    /* OPEN state */
     .nav-content.menu-open .nav-links {
-        max-height: 300px;
+        max-height: 500px;   
         opacity: 1;
         transform: translateY(0);
         padding-top: 10px;
         padding-bottom: 10px;
     }
 
-    /* full-width links */
     .nav-links a,
     .nav-links .nav-dropdown {
         width: 100%;
@@ -299,7 +299,6 @@ body {
         padding: 10px 0;
     }
 
-    /* dropdown behaves like normal block on mobile */
     .nav-dropdown .dropdown-menu {
         position: static;
         width: 100%;
