@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Ao3 Preview</title>
+</head>
+
+<body>
+  <div id="preview-root"></div>
+
+  <script>
+    fetch('test_data/TestProject/Racing_for_a_Dream.html')
+      .then(response => response.text())
+      .then(html => {
+        // Wrap the Ao3 content inside a div with id "workskin"
+        document.getElementById('preview-root').innerHTML = `<div id="workskin">${html}</div>`;
+      })
+      .catch(err => {
+        document.getElementById('preview-root').innerHTML = '<p style="color:red;">Failed to load preview</p>';
+        console.error(err);
+      });
+  </script>
+</body>
+
+</html>

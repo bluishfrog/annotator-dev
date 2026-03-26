@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <div id="head-placeholder"></div>
+    <script src="js/loadComponents.js"></script>
+</head>
+
+<body>
+
+    <div class="page-wrapper">
+
+        <!-- NAV -->
+        <div id="nav-placeholder"></div>
+
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <h1>HTML Builder</h1>
+            <p>Placeholder. We will fill it with features later.</p>
+
+            <!-- Split Screen for preview -->
+            <div class="builder-section-container">
+
+                <!-- left side of builder, where the editor is -->
+                <div class="builder-section">
+
+                    <h2>Editor</h2>
+
+                    <div class="builder-editor">
+
+                        <div class="editor-card">
+                            <h3>Project Info</h3>
+                            <p>Select the config file of the project you want to be working in. If you have not setup a
+                                project yet, you can do so <a href="project_settings.html">here</a>.</p>
+
+                            <div class="preview-plus-button">
+                                <div class="container-file-preview">
+                                    <div class="file-preview" id="mainFileConfig">No project selected</div>
+                                </div>
+                                <div class="file-actions">
+                                    <button onclick="assignMainDocument()">Select Project</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="editor-card">
+                            <h3>Document Logic</h3>
+                            <p>Placeholder</p>
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- right side of builder, where the preview is -->
+                <div class="builder-section">
+                    <h2>Preview</h2>
+                    <iframe id="preview-frame" src="preview.html"
+                        style="width:100%; height:100%; border:none;"></iframe>
+                </div>
+
+            </div>
+
+        </main>
+
+
+        <!-- FOOTER -->
+        <div id="footer-placeholder"></div>
+
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="js/loadComponents.js"></script>
+
+</body>
+
+</html>
