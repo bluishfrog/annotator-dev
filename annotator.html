@@ -33,7 +33,7 @@
 
                         <div class="level2-card tabbed-card">
 
-                            <!-- Tabs (THIS WAS MISSING) -->
+                            <!-- Desktop dropdown (hidden on smaller screens)-->
                             <div class="tab-header">
                                 <button class="tab-button active" onclick="switchTab(event, 'tab-html')">
                                     HTML File Setup
@@ -44,6 +44,15 @@
                                 <button class="tab-button" onclick="switchTab(event, 'tab-comment')">
                                     Annotation Customization
                                 </button>
+                            </div>
+
+                            <!-- Mobile dropdown (only visible on small screens) -->
+                            <div class="tab-dropdown">
+                                <select onchange="switchTabSelect(this)">
+                                    <option value="tab-html">HTML file to annotate</option>
+                                    <option value="tab-preview">Preview Configurations</option>
+                                    <option value="tab-comment">Comment Configurations</option>
+                                </select>
                             </div>
 
                             <!-- Tab Content -->

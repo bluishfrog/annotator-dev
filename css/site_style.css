@@ -357,39 +357,44 @@ body {
 }
 
 
-/* ---------- Responsive Tabs ---------- */
+/* ---------- Tab Dropdown (Mobile) ---------- */
+
+.tab-dropdown {
+    display: none;
+    padding: 10px 10px 0 10px;
+}
+
+.tab-dropdown select {
+    width: 100%;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid #d0d0d0;
+    font-family: inherit;
+    font-size: 14px;
+    background-color: #ffffff;
+    color: #333;
+}
+
+.tab-dropdown select:focus {
+    outline: none;
+    border-color: #C9F2FF;
+    box-shadow: 0 0 0 2px rgba(201, 242, 255, 0.5);
+}
+
+/* ---------- Responsive Behavior ---------- */
 
 @media (max-width: 700px) {
 
-    .tab-header {
-        overflow-x: auto;
-        flex-wrap: nowrap;
-        gap: 0;
-        padding: 10px 10px 0 10px;
-
-        /* smooth scrolling */
-        scroll-behavior: smooth;
+    /* Show dropdown */
+    .tab-dropdown {
+        display: block;
     }
 
-    /* hide scrollbar (clean look) */
-    .tab-header::-webkit-scrollbar {
+    /* Hide tab buttons */
+    .tab-header {
         display: none;
     }
-
-    .tab-header {
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-    }
-
-    .tab-button {
-        flex: 0 0 auto; /* stop equal stretching */
-        min-width: 160px; /* gives nice tap targets */
-        white-space: nowrap;
-
-        text-align: center;
-    }
 }
-
 
 
 /* ---------- File Actions & Buttons ---------- */
