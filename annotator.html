@@ -33,10 +33,22 @@
 
                         <div class="level2-card tabbed-card">
 
+                            <!-- Tabs (THIS WAS MISSING) -->
+                            <div class="tab-header">
+                                <button class="tab-button active" onclick="switchTab(event, 'tab-html')">
+                                    HTML file to annotate
+                                </button>
+                                <button class="tab-button" onclick="switchTab(event, 'tab-preview')">
+                                    Preview Configurations
+                                </button>
+                                <button class="tab-button" onclick="switchTab(event, 'tab-comment')">
+                                    Comment Configurations
+                                </button>
+                            </div>
+
                             <!-- Tab Content -->
                             <div class="tab-content">
 
-                                <!-- TAB 1 -->
                                 <div id="tab-html" class="tab-pane active">
                                     <div class="preview-plus-button">
                                         <div class="container-file-preview">
@@ -51,12 +63,10 @@
                                     <p>Placeholder for HTML file configuration.</p>
                                 </div>
 
-                                <!-- TAB 2 -->
                                 <div id="tab-preview" class="tab-pane">
                                     <p>Placeholder for preview configurations.</p>
                                 </div>
 
-                                <!-- TAB 3 -->
                                 <div id="tab-comment" class="tab-pane">
                                     <p>Placeholder for comment configurations.</p>
                                 </div>
