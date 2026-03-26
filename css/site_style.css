@@ -601,6 +601,13 @@ h3 {
 
 
 /* ---------- AO3 de-layouting ---------- */
+
+#htmlpreview .byline p {
+    font-weight: 500;
+    margin: 0 0 2em 0;
+    line-height: 1.6;
+}
+
 #htmlpreview .userstuff {
     font-family: inherit !important;
     font-size: 1rem;
