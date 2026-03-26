@@ -69,8 +69,7 @@ body {
     transition: color 0.2s ease-in-out;
 }
 
-.site-nav .nav-content>a,
-.site-nav .nav-content>.nav-dropdown>.dropdown-toggle {
+.nav-links a {
     font-weight: 500;
 }
 
