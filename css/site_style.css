@@ -312,6 +312,7 @@ body {
 
 /* Individual tab buttons */
 .tab-button {
+    flex:1;
     border: 1px solid #d0d0d0;
     border-bottom: none;
     background-color: #eaeaea;
@@ -322,6 +323,7 @@ body {
     cursor: pointer;
     color: #33337C;
     transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+    text-align: center;
 }
 
 /* Hover */
