@@ -36,13 +36,13 @@
                             <!-- Tabs (THIS WAS MISSING) -->
                             <div class="tab-header">
                                 <button class="tab-button active" onclick="switchTab(event, 'tab-html')">
-                                    HTML file to annotate
+                                    HTML File Setup
                                 </button>
                                 <button class="tab-button" onclick="switchTab(event, 'tab-preview')">
-                                    Preview Configurations
+                                    Preview Configuration
                                 </button>
                                 <button class="tab-button" onclick="switchTab(event, 'tab-comment')">
-                                    Comment Configurations
+                                    Annotation Customization
                                 </button>
                             </div>
 
@@ -50,6 +50,7 @@
                             <div class="tab-content">
 
                                 <div id="tab-html" class="tab-pane active">
+                                    <p>Download the HTML file from your local machine. If you want to annotate a story from ao3, download it as HTML and save it on your device. Your annotations will be saved directly in this html.</p>
                                     <div class="preview-plus-button">
                                         <div class="container-file-preview">
                                             <div class="file-preview" id="HTMLFile">
@@ -60,7 +61,6 @@
                                             <button onclick="assignHTMLFile()">Select HTML file</button>
                                         </div>
                                     </div>
-                                    <p>Placeholder for HTML file configuration.</p>
                                 </div>
 
                                 <div id="tab-preview" class="tab-pane">
