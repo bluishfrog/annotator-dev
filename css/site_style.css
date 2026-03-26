@@ -602,13 +602,8 @@ h3 {
 
 /* ---------- AO3 de-layouting ---------- */
 
-#htmlpreview .meta p {
+#htmlpreview .meta p:first-of-type {
     font-weight: 500;
-    margin: 1.5em 0 0.5em 0;
-}
-
-#htmlpreview .meta p + * {
-    font-weight: 400;
 }
 
 #htmlpreview .userstuff {
