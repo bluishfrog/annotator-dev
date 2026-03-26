@@ -607,7 +607,7 @@ h3 {
     margin: 1.5em 0 0.5em 0;
 }
 
-#htmlpreview .meta p + blockquote.userstuff {
+#htmlpreview .meta p + * {
     font-weight: 400;
 }
 
