@@ -358,7 +358,7 @@ body {
 
     .footer-left,
     .footer-right {
-        align-content: center;
+        align-self: center;
     }
 }
 
