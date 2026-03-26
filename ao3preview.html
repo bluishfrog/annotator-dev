@@ -14,7 +14,7 @@
       .then(response => response.text())
       .then(html => {
         // Wrap the Ao3 content inside a div with id "workskin"
-        document.getElementById('preview-root').innerHTML = `<div id="workskin">${html}</div>`;
+        document.getElementById('preview-root').innerHTML = `<div id="htmlpreview">${html}</div>`;
       })
       .catch(err => {
         document.getElementById('preview-root').innerHTML = '<p style="color:red;">Failed to load preview</p>';
