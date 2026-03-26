@@ -353,7 +353,12 @@ body {
     }
 
     .footer-right img {
-        height: 2.8em;
+        height: 2.0em;
+    }
+
+    .footer-left,
+    .footer-right {
+        align-content: center;
     }
 }
 
