@@ -26,7 +26,7 @@
             <!-- Split Screen for preview -->
             <div class="level1-container">
 
-                <!-- left side of builder, where the upload confg and comment preview is -->
+                <!-- left side of builder, where the upload confg and annot preview is -->
                 <div class="level1-section builder-panel">
 
                     <div class="level2-container">
@@ -41,7 +41,7 @@
                                 <button class="tab-button" onclick="switchTab(event, 'tab-preview')">
                                     Preview Configuration
                                 </button>
-                                <button class="tab-button" onclick="switchTab(event, 'tab-comment')">
+                                <button class="tab-button" onclick="switchTab(event, 'tab-annot')">
                                     Annotation Customization
                                 </button>
                             </div>
@@ -51,7 +51,7 @@
                                 <select onchange="switchTabSelect(this)">
                                     <option value="tab-html">HTML file to annotate</option>
                                     <option value="tab-preview">Preview Configurations</option>
-                                    <option value="tab-comment">Comment Configurations</option>
+                                    <option value="tab-annot">Annotation Configurations</option>
                                 </select>
                             </div>
 
@@ -78,15 +78,21 @@
                                     <p>Placeholder for preview configurations.</p>
                                 </div>
 
-                                <div id="tab-comment" class="tab-pane">
-                                    <p>Placeholder for comment configurations.</p>
+                                <div id="tab-annot" class="tab-pane">
+                                    <p>Define how annotations should be rendered.</p>
+
+                                    <textarea id="annotation-template" style="width:100%; height:180px;">
+                                        <div id="default-annot-format"></div>
+                                    </textarea>
+
+                                    <small>Placeholders you can use: {chapter}, {quoted_text}, {annotation_text}</small>
                                 </div>
 
                             </div>
                         </div>
 
                         <div class="level2-card">
-                            <h3>Comment preview</h3>
+                            <h3>Annotation preview</h3>
                             <p>Placeholder</p>
 
                         </div>

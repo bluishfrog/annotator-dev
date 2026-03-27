@@ -50,3 +50,49 @@ function toggleBuilderPanel() {
     document.querySelector('.collapse-button')
         .classList.toggle('collapsed');
 }
+
+function initNavDropdowns() {
+    const isMobile = window.matchMedia("(max-width: 700px)").matches;
+
+    document.querySelectorAll('.dropdown-toggle').forEach(btn => {
+        let tappedOnce = false;
+
+        btn.addEventListener('click', e => {
+            const menu = btn.nextElementSibling;
+            if (!menu) return;
+
+            // Desktop → allow normal navigation
+            if (!isMobile) return;
+
+            // Mobile behavior
+            if (!tappedOnce) {
+                e.preventDefault(); // stop navigation on first tap
+                menu.style.display = 'block';
+                tappedOnce = true;
+            } else {
+                // second tap → allow navigation
+                tappedOnce = false;
+            }
+        });
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', e => {
+        document.querySelectorAll('.dropdown-menu').forEach(menu => {
+            const toggle = menu.previousElementSibling;
+
+            if (!menu.contains(e.target) && !toggle.contains(e.target)) {
+                menu.style.display = 'none';
+
+                // reset tap state
+                toggle._tappedOnce = false;
+            }
+        });
+    });
+}
+
+
+function toggleMenu(button) {
+    const nav = button.closest('.nav-content');
+    nav.classList.toggle('menu-open');
+}
