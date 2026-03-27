@@ -656,8 +656,3 @@ h3 {
 #htmlpreview .meta dd {
     margin: 0 !important;
 }
-
-/* Optional: make labels slightly stronger */
-#htmlpreview .meta dt {
-    font-weight: 500;
-}
