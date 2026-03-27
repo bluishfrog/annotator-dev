@@ -594,7 +594,7 @@ body {
     flex: 1 1 0;
     min-width: 320px;
 
-    max-width: 600px;
+    max-width: 450px;
 
     transition:
         max-width 0.35s ease,
