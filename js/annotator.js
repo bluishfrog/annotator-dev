@@ -43,6 +43,10 @@ function switchTabSelect(selectElement) {
 
 
 function toggleBuilderPanel() {
+    
     document.querySelector('.level1-container')
+        .classList.toggle('collapsed');
+
+    document.querySelector('.collapse-button')
         .classList.toggle('collapsed');
 }

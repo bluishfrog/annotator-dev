@@ -634,7 +634,7 @@ body {
 
 .collapse-button {
     position: fixed;
-    top: 64px;
+    top: 84px;
     left: 12px;
 
     z-index: 2000;
@@ -672,14 +672,13 @@ body {
     transform: rotate(var(--rotation)) scale(var(--scale));
 }
 
-
 .collapse-toggle:hover {
     --scale: 1.05;
     background-color: #b6e9f7;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18);
 }
 
-.level1-container.collapsed .collapse-toggle {
+.collapse-button.collapsed .collapse-toggle {
     --rotation: 180deg;
 }
 
