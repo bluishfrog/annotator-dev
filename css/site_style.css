@@ -630,6 +630,58 @@ body {
     }    
 }
 
+/* ---------- Collapse Button ---------- */
+
+.collapse-button {
+    position: fixed;
+    top: 12px;
+    left: 12px;
+
+    z-index: 2000;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.collapse-toggle {
+    width: 34px;
+    height: 34px;
+
+    border: 1px solid rgba(51, 51, 124, 0.2);
+    border-radius: 10px;
+
+    background-color: #C9F2FF;
+    color: #33337C;
+
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1;
+
+    cursor: pointer;
+
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition:
+        transform 0.25s ease,
+        background-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.collapse-toggle:hover {
+    background-color: #b6e9f7;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18);
+    transform: scale(1.05);
+}
+
+.level1-container.collapsed .collapse-toggle {
+    transform: rotate(180deg);
+}
+
 
 /* ---------- File Actions & Buttons ---------- */
 .file-actions {
