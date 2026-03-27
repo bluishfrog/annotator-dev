@@ -19,10 +19,10 @@ async function assignHTMLFile() {
         const file = await fileHandle.getFile();
         const text = await file.text();
 
+        document.getElementById("HTMLFile").textContent = file.name;
+
         loadHTMLIntoPreview(text);
         loadAnnotPreview(text);
-
-        document.getElementById("HTMLFile").textContent = file.name;
 
     } catch (err) {
         console.log("File selection cancelled or failed:", err);
