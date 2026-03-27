@@ -39,7 +39,7 @@ function initAnnotationSystem() {
     const deleteBtn = document.getElementById("annotation-delete");
 
 
-    preview.addEventListener("mouseup", () => {
+    preview.addEventListener("pointerup", () => {
 
         if (!currentHTMLFileHandle) {
             alert("You need to load your own HTML first before you can start annotating :)");
