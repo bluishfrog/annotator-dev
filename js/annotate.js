@@ -72,17 +72,66 @@ function initAnnotationSystem() {
     });
 
 
-    // CLICK → SHOW ANNOTATION
-    preview.addEventListener("click", (e) => {
+    let activeAnnotation = null;
 
+    const popover = document.getElementById("annotation-popover");
+    const input = document.getElementById("annotation-input");
+    const saveBtn = document.getElementById("annotation-save");
+    const deleteBtn = document.getElementById("annotation-delete");
+
+    preview.addEventListener("click", (e) => {
         if (!currentHTMLFileHandle) return;
 
         const el = e.target.closest(".annotation");
         if (!el) return;
 
-        const note = el.dataset.note;
-        alert(note);
+        activeAnnotation = el;
+
+        // load text
+        input.value = el.dataset.note || "";
+
+        // position popover
+        const rect = el.getBoundingClientRect();
+
+        popover.style.top = window.scrollY + rect.bottom + 8 + "px";
+        popover.style.left = window.scrollX + rect.left + "px";
+
+        popover.classList.remove("hidden");
     });
+
+    saveBtn.addEventListener("click", async () => {
+        if (!activeAnnotation) return;
+
+        activeAnnotation.dataset.note = input.value;
+
+        popover.classList.add("hidden");
+
+        await saveFile(); // 🔥 immediate save
+    });
+
+    deleteBtn.addEventListener("click", async () => {
+        if (!activeAnnotation) return;
+
+        const parent = activeAnnotation.parentNode;
+
+        // unwrap span (keep text)
+        while (activeAnnotation.firstChild) {
+            parent.insertBefore(activeAnnotation.firstChild, activeAnnotation);
+        }
+
+        parent.removeChild(activeAnnotation);
+
+        popover.classList.add("hidden");
+
+        await saveFile();
+    });
+    
+    document.addEventListener("click", (e) => {
+        if (!popover.contains(e.target) && !e.target.closest(".annotation")) {
+            popover.classList.add("hidden");
+        }
+    });
+
 }
 
 
