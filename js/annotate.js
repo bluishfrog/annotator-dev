@@ -76,7 +76,7 @@ function initAnnotationSystem() {
 
     const popover = document.getElementById("annotation-popover");
     const input = document.getElementById("annotation-input");
-    const cancelBtn = document.getElementById("annotation-candel");
+    const cancelBtn = document.getElementById("annotation-cancel");
     const saveBtn = document.getElementById("annotation-save");
     const deleteBtn = document.getElementById("annotation-delete");
 
@@ -100,10 +100,8 @@ function initAnnotationSystem() {
         popover.classList.remove("hidden");
     });
 
-    cancelBtn.addEventListener("click", async () => {
-        document.getElementById("annotation-cancel").addEventListener("click", () => {
-            hidePopover();
-        });
+    cancelBtn.addEventListener("click", () => {
+        hidePopover();
     });
 
     saveBtn.addEventListener("click", async () => {
