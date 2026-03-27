@@ -242,14 +242,3 @@ function updateFormat() {
 }
 
 
-document.addEventListener("DOMContentLoaded", () => {
-    initAnnotationSystem();
-
-    document
-        .getElementById("annotation-template")
-        .addEventListener("input", updatePreview);
-
-    document
-        .getElementById("preview-mode-toggle")
-        .addEventListener("change", togglePreviewMode);
-});

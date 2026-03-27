@@ -20,6 +20,7 @@ async function assignHTMLFile() {
         const text = await file.text();
 
         loadHTMLIntoPreview(text);
+        loadAnnotPreview(text);
 
         document.getElementById("HTMLFile").textContent = file.name;
 
@@ -40,5 +41,17 @@ function loadHTMLIntoPreview(htmlContent) {
     previewRoot.innerHTML = `<div id="htmlpreview">${htmlContent}</div>`;
 
     initAnnotationSystem();
-    updatePreview();
+}
+
+function loadAnnotPreview(htmlContent) {
+
+    originalHTMLContent = htmlContent;
+
+    formattedAnnots = constructHTMLAnnotations(originalHTMLContent);
+
+    window.formattedAnnots = formattedAnnots;
+
+    const previewRoot = document.getElementById('annot-preview-frame');
+
+    previewRoot.innerHTML = htmlContent;
 }
