@@ -47,11 +47,11 @@ function loadAnnotPreview(htmlContent) {
 
     originalHTMLContent = htmlContent;
 
-    formattedAnnots = constructHTMLAnnotations(originalHTMLContent);
+    formattedAnnots = buildAnnotationPreview(originalHTMLContent);
 
     window.formattedAnnots = formattedAnnots;
 
     const previewRoot = document.getElementById('annot-preview-frame');
 
-    previewRoot.innerHTML = htmlContent;
+    previewRoot.innerHTML = formattedAnnots;
 }
