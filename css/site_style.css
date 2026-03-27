@@ -1140,7 +1140,7 @@ h3 {
 .annot-preview-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: baseline;
 
     margin-bottom: 8px;
 }
