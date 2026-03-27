@@ -1,26 +1,30 @@
 let currentRange = null;
+let activeAnnotation = null;
 
-function showAnnotationPopover(range) {
+function showAnnotationPopover(rect) {
     const popover = document.getElementById("annotation-popover");
     const input = document.getElementById("annotation-input");
-
-    const rect = range.getBoundingClientRect();
 
     popover.style.top = `${window.scrollY + rect.bottom + 8}px`;
     popover.style.left = `${window.scrollX + rect.left}px`;
 
     popover.classList.remove("hidden");
 
-    input.value = "";
     input.focus();
 }
 
 function hidePopover() {
     const popover = document.getElementById("annotation-popover");
+    const input = document.getElementById("annotation-input");
+
     popover.classList.add("hidden");
 
     window.getSelection().removeAllRanges();
+
     currentRange = null;
+    activeAnnotation = null;
+
+    input.value = "";
 }
 
 function initAnnotationSystem() {
@@ -28,7 +32,13 @@ function initAnnotationSystem() {
 
     if (!preview) return;
 
-    // TEXT SELECTION → CREATE ANNOTATION
+    const popover = document.getElementById("annotation-popover");
+    const input = document.getElementById("annotation-input");
+    const cancelBtn = document.getElementById("annotation-cancel");
+    const saveBtn = document.getElementById("annotation-save");
+    const deleteBtn = document.getElementById("annotation-delete");
+
+
     preview.addEventListener("mouseup", () => {
 
         if (!currentHTMLFileHandle) {
@@ -42,43 +52,21 @@ function initAnnotationSystem() {
         const range = selection.getRangeAt(0);
         if (range.collapsed) return;
 
-        // prevent annotating inside annotation
         const container = range.commonAncestorContainer;
         if (container.parentElement?.closest(".annotation")) {
             alert("Cannot annotate inside another annotation");
             return;
         }
 
-        currentRange = range;
-        showAnnotationPopover(range);
+        currentRange = range.cloneRange();
+        activeAnnotation = null;
 
-        document.getElementById("annotation-save").addEventListener("click", () => {
-            const input = document.getElementById("annotation-input");
-            const text = input.value.trim();
-
-            if (!text || !currentRange) return;
-
-            wrapSelection(currentRange, text);
-            saveHTMLPreviewToFile();
-
-            hidePopover();
-        });
-
-        document.getElementById("annotation-cancel").addEventListener("click", () => {
-            hidePopover();
-        });
+        const rect = range.getBoundingClientRect();
+        showAnnotationPopover(rect);
 
         selection.removeAllRanges();
     });
 
-
-    let activeAnnotation = null;
-
-    const popover = document.getElementById("annotation-popover");
-    const input = document.getElementById("annotation-input");
-    const cancelBtn = document.getElementById("annotation-cancel");
-    const saveBtn = document.getElementById("annotation-save");
-    const deleteBtn = document.getElementById("annotation-delete");
 
     preview.addEventListener("click", (e) => {
         if (!currentHTMLFileHandle) return;
@@ -87,56 +75,58 @@ function initAnnotationSystem() {
         if (!el) return;
 
         activeAnnotation = el;
+        currentRange = null;
 
-        // load text
         input.value = el.dataset.note || "";
 
-        // position popover
         const rect = el.getBoundingClientRect();
-
-        popover.style.top = window.scrollY + rect.bottom + 8 + "px";
-        popover.style.left = window.scrollX + rect.left + "px";
-
-        popover.classList.remove("hidden");
+        showAnnotationPopover(rect);
     });
+
 
     cancelBtn.addEventListener("click", () => {
         hidePopover();
     });
 
+
     saveBtn.addEventListener("click", async () => {
-        if (!activeAnnotation) return;
+        const text = input.value.trim();
+        if (!text) return;
 
-        activeAnnotation.dataset.note = input.value;
+        if (currentRange) {
+            wrapSelection(currentRange, text);
+        }
 
-        popover.classList.add("hidden");
+        else if (activeAnnotation) {
+            activeAnnotation.dataset.note = text;
+        }
 
-        await saveFile(); // 🔥 immediate save
+        hidePopover();
+        await saveFile();
     });
+
 
     deleteBtn.addEventListener("click", async () => {
         if (!activeAnnotation) return;
 
         const parent = activeAnnotation.parentNode;
 
-        // unwrap span (keep text)
         while (activeAnnotation.firstChild) {
             parent.insertBefore(activeAnnotation.firstChild, activeAnnotation);
         }
 
         parent.removeChild(activeAnnotation);
 
-        popover.classList.add("hidden");
-
+        hidePopover();
         await saveFile();
     });
 
+
     document.addEventListener("click", (e) => {
         if (!popover.contains(e.target) && !e.target.closest(".annotation")) {
-            popover.classList.add("hidden");
+            hidePopover();
         }
     });
-
 }
 
 
@@ -158,7 +148,6 @@ function wrapSelection(range, annotationText) {
 }
 
 
-// SAVE FUNCTION
 async function saveFile() {
     if (!currentHTMLFileHandle) return;
 
