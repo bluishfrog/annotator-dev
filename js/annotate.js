@@ -21,6 +21,18 @@ function initAnnotationSystem() {
 
 /* ---------------- overwriteSrcHTMLfile ---------------- */
 
+async function saveFile() {
+    if (!currentHTMLFileHandle) return;
+
+    const writable = await currentHTMLFileHandle.createWritable();
+
+    const html = document.getElementById("htmlpreview").innerHTML;
+
+    await writable.write(html);
+    await writable.close();
+}
+
+
 async function overwriteSrcHTMLfile() {
     if (!window.currentHTMLFileHandle) {
         console.warn("No file handle available.");
@@ -152,7 +164,7 @@ function saveAnnotation() {
         return;
     }
 
-    overwriteSrcHTMLfile();
+    saveFile()
 
     closePopover();
 }
@@ -174,7 +186,7 @@ function deleteAnnotation() {
 
     parent.removeChild(activeAnnotationEl);
 
-    overwriteSrcHTMLfile();
+    saveFile()
 
     closePopover();
 }
