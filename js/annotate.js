@@ -5,6 +5,12 @@ let annotationCounter = 0;
 /* ---------------- INIT ---------------- */
 
 function initAnnotationSystem() {
+
+    if (!currentHTMLFileHandle) {
+        alert("You need to load your own HTML first before you can start annotating :)");
+        return;
+    }
+
     const preview = document.getElementById("htmlpreview");
 
     if (!preview) return;
@@ -19,7 +25,7 @@ function initAnnotationSystem() {
     document.getElementById("annotation-delete").onclick = deleteAnnotation;
 }
 
-/* ---------------- overwriteSrcHTMLfile ---------------- */
+/* ---------------- Save File ---------------- */
 
 async function saveFile() {
     if (!currentHTMLFileHandle) return;
@@ -30,43 +36,6 @@ async function saveFile() {
 
     await writable.write(html);
     await writable.close();
-}
-
-
-async function overwriteSrcHTMLfile() {
-    if (!window.currentHTMLFileHandle) {
-        console.warn("No file handle available.");
-        return;
-    }
-
-    const preview = document.getElementById("htmlpreview");
-    if (!preview) return;
-
-    try {
-        const updatedInnerHTML = preview.innerHTML;
-
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(window.originalHTMLContent, "text/html");
-
-        const previewContainer = doc.getElementById("htmlpreview");
-
-        if (!previewContainer) {
-            console.warn("No #htmlpreview found in original file.");
-            return;
-        }
-
-        // Replace ONLY inner content safely
-        previewContainer.innerHTML = updatedInnerHTML;
-
-        const updatedFullHTML = "<!DOCTYPE html>\n" + doc.documentElement.outerHTML;
-
-        const writable = await window.currentHTMLFileHandle.createWritable();
-        await writable.write(updatedFullHTML);
-        await writable.close();
-
-    } catch (err) {
-        console.error("Failed to overwrite HTML file:", err);
-    }
 }
 
 
@@ -81,6 +50,24 @@ function handleTextSelection() {
     // ensure selection is inside preview
     const preview = document.getElementById("htmlpreview");
     if (!preview.contains(range.commonAncestorContainer)) return;
+
+    // detect if selection touches an existing annotation
+    const startContainer = range.startContainer;
+    const endContainer = range.endContainer;
+
+    const startAnnotation = startContainer.nodeType === 3
+        ? startContainer.parentElement?.closest(".annotation")
+        : startContainer.closest?.(".annotation");
+
+    const endAnnotation = endContainer.nodeType === 3
+        ? endContainer.parentElement?.closest(".annotation")
+        : endContainer.closest?.(".annotation");
+
+    if (startAnnotation || endAnnotation) {
+        alert("You cannot create an annotation inside an existing annotation. Please select text outside the highlighted areas.");
+        selection.removeAllRanges();
+        return;
+    }
 
     selectedRange = range;
 
