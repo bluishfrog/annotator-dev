@@ -553,7 +553,6 @@ body {
 
 /* ---------- Collapsible Builder Panel ---------- */
 
-
 .builder-panel {
     position: sticky;
     top: 20px;
@@ -562,24 +561,34 @@ body {
     max-height: calc(100vh - 40px);
     overflow-y: auto;
 
-    /* smooth animation for collapse/expand */
-    transition: opacity 0.3s ease, transform 0.3s ease, flex 0.35s ease;
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-/* default visible state */
+/* normal state */
 .builder-panel {
     opacity: 1;
     transform: translateX(0);
 }
 
-/* collapse button */
-.collapse-toggle {
-    position: absolute;
-    top: 10px;
-    right: -12px;
+/* collapsed state */
+.level1-container.collapsed .builder-panel {
+    flex: 0 0 0px;
 
-    width: 24px;
-    height: 24px;
+    opacity: 0;
+    transform: translateX(-20px);
+
+    pointer-events: none;
+}
+
+/* button */
+.collapse-toggle {
+    position: fixed;
+
+    top: 100px;
+    left: 10px;
+
+    width: 28px;
+    height: 28px;
 
     border: none;
     border-radius: 50%;
@@ -596,6 +605,8 @@ body {
 
     box-shadow: 0 2px 5px rgba(0,0,0,0.15);
 
+    z-index: 1000;
+
     transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
@@ -604,48 +615,9 @@ body {
     background-color: #b2e4f5;
 }
 
-/* collapsed panel */
-.level1-container.collapsed .builder-panel {
-    flex: 0 0 0px;
-
-    opacity: 0;
-    transform: translateX(-20px);
-
-    padding: 0;
-    margin: 0;
-
-    overflow: hidden;
-
-    pointer-events: none;
-}
-
-/* inner fade */
-.level1-container.collapsed .builder-panel .level2-container {
-    opacity: 0;
-    transform: translateX(-10px);
-}
-
-/* collapse button*/
-.level1-container.collapsed .collapse-toggle {
-    position: fixed;
-
-    top: 100px;
-    left: 10px;
-    right: auto;
-
+/* rotate when open/closed */
+.level1-container.collapsed + .collapse-toggle {
     transform: rotate(180deg);
-
-    z-index: 1000;
-}
-
-/* preview expand */
-.level1-container.collapsed .level1-section:last-child {
-    flex: 1 1 100%;
-}
-
-/* layout transition */
-.level1-container {
-    transition: all 0.35s ease;
 }
 
 
