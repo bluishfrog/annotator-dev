@@ -43,7 +43,7 @@ function initAnnotationSystem() {
     preview.addEventListener("mouseup", () => {
 
         if (!currentHTMLFileHandle) {
-            alert("You need to load your own HTML first before you can start annotating :)");
+            showToast("You need to load your own HTML first before you can start annotating :)");
             return;
         }
 
@@ -61,7 +61,7 @@ function initAnnotationSystem() {
         if (node.nodeType === 3) node = node.parentElement;
 
         if (node?.closest(".annotation")) {
-            alert("Cannot annotate inside another annotation");
+            showToast("Cannot annotate inside another annotation");
             return;
         }
 
@@ -147,7 +147,7 @@ function wrapSelection(range, annotationText) {
         const safeRange = range.cloneRange();
         safeRange.surroundContents(span);
     } catch (err) {
-        alert("Selection too complex. Try selecting within one paragraph.");
+        showToast("Selection too complex. Try selecting within one paragraph.");
         console.error(err);
     }
 }
