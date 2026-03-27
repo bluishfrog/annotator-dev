@@ -63,8 +63,6 @@ function initAnnotationSystem() {
 
         const rect = range.getBoundingClientRect();
         showAnnotationPopover(rect);
-
-        selection.removeAllRanges();
     });
 
 
@@ -100,6 +98,8 @@ function initAnnotationSystem() {
         else if (activeAnnotation) {
             activeAnnotation.dataset.note = text;
         }
+
+        window.getSelection().removeAllRanges();
 
         hidePopover();
         await saveFile();
