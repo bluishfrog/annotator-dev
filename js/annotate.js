@@ -43,7 +43,7 @@ function handleTextSelection() {
     const range = selection.getRangeAt(0);
 
     if (!currentHTMLFileHandle) {
-        alert("You need to load your own HTML first before you can start annotating :)");
+        showToast("You need to load your own HTML first before you can start annotating :)");
         return;
     }
 
@@ -64,7 +64,7 @@ function handleTextSelection() {
         : endContainer.closest?.(".annotation");
 
     if (startAnnotation || endAnnotation) {
-        alert("You cannot create an annotation inside an existing annotation. Please select text outside the highlighted areas.");
+        showToast("You cannot create an annotation inside an existing annotation. Please select text outside the highlighted areas.");
         selection.removeAllRanges();
         return;
     }
@@ -183,3 +183,5 @@ function deleteAnnotation() {
 function generateId() {
     return `ann-${Date.now()}-${annotationCounter++}`;
 }
+
+
