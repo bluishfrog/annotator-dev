@@ -553,6 +553,7 @@ body {
 
 /* ---------- Collapsible Builder Panel ---------- */
 
+
 .builder-panel {
     position: sticky;
     top: 20px;
@@ -561,9 +562,17 @@ body {
     max-height: calc(100vh - 40px);
     overflow-y: auto;
 
-    transition: all 0.3s ease;
+    /* smooth animation for collapse/expand */
+    transition: opacity 0.3s ease, transform 0.3s ease, flex 0.35s ease;
 }
 
+/* default visible state */
+.builder-panel {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* collapse button */
 .collapse-toggle {
     position: absolute;
     top: 10px;
@@ -595,27 +604,33 @@ body {
     background-color: #b2e4f5;
 }
 
+/* collapsed panel */
 .level1-container.collapsed .builder-panel {
-    flex: 0;
-    width: 0;
-    min-width: 0;
+    flex: 0 0 0px;
+
+    opacity: 0;
+    transform: translateX(-20px);
 
     padding: 0;
     margin: 0;
 
-    overflow: visible;
+    overflow: hidden;
+
+    pointer-events: none;
 }
 
+/* inner fade */
 .level1-container.collapsed .builder-panel .level2-container {
-    display: none;
+    opacity: 0;
+    transform: translateX(-10px);
 }
 
+/* collapse button*/
 .level1-container.collapsed .collapse-toggle {
     position: fixed;
 
     top: 100px;
     left: 10px;
-
     right: auto;
 
     transform: rotate(180deg);
@@ -623,43 +638,14 @@ body {
     z-index: 1000;
 }
 
+/* preview expand */
 .level1-container.collapsed .level1-section:last-child {
     flex: 1 1 100%;
 }
 
-
-/* ---------- File Actions & Buttons ---------- */
-.file-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 20px;
-    align-items: center;
-}
-
-.file-actions button {
-    background-color: #C9F2FF;
-    border: none;
-    border-radius: 8px;
-    padding: 8px 16px;
-    font-family: inherit;
-    font-size: 14px;
-    cursor: pointer;
-    transition: transform 0.1s ease-in-out, background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.file-actions button:not(:disabled):hover {
-    transform: translateY(-2px);
-    background-color: #b2e4f5;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-}
-
-button:disabled {
-    background-color: #d0d0d0;
-    color: #aaa;
-    cursor: not-allowed;
-    box-shadow: none;
+/* layout transition */
+.level1-container {
+    transition: all 0.35s ease;
 }
 
 
