@@ -809,14 +809,14 @@ h3 {
 /* ---------- Annotation ---------- */
 
 .annotation {
-    background-color: #b6e9f7;
+    background-color: #C9F2FF;
     border-radius: 3px;
     cursor: pointer;
     transition: background-color 0.2s ease;
 }
 
 .annotation:hover {
-    background-color: #b2e4f5;
+    background-color: #C9F2FF;
 }
 
 
