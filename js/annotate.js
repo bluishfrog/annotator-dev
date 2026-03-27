@@ -1,165 +1,143 @@
-let currentRange = null;
-let activeAnnotation = null;
+let selectedRange = null;
+let activeAnnotationEl = null;
+let annotationCounter = 0;
 
-function showAnnotationPopover(rect) {
-    const popover = document.getElementById("annotation-popover");
-    const input = document.getElementById("annotation-input");
-
-    popover.style.top = `${window.scrollY + rect.bottom + 8}px`;
-    popover.style.left = `${window.scrollX + rect.left}px`;
-
-    popover.classList.remove("hidden");
-
-    input.focus();
-}
-
-function hidePopover() {
-    const popover = document.getElementById("annotation-popover");
-    const input = document.getElementById("annotation-input");
-
-    popover.classList.add("hidden");
-
-    window.getSelection().removeAllRanges();
-
-    currentRange = null;
-    activeAnnotation = null;
-
-    input.value = "";
-}
+/* ---------------- INIT ---------------- */
 
 function initAnnotationSystem() {
     const preview = document.getElementById("htmlpreview");
 
     if (!preview) return;
 
-    const popover = document.getElementById("annotation-popover");
-    const input = document.getElementById("annotation-input");
-    const cancelBtn = document.getElementById("annotation-cancel");
-    const saveBtn = document.getElementById("annotation-save");
-    const deleteBtn = document.getElementById("annotation-delete");
+    // click inside preview to create or edit annotation
+    preview.addEventListener("mouseup", handleTextSelection);
+    preview.addEventListener("click", handleAnnotationClick);
 
-
-
-    preview.addEventListener("mouseup", () => {
-
-        if (!currentHTMLFileHandle) {
-            alert("You need to load your own HTML first before you can start annotating :)");
-            return;
-        }
-
-        const selection = window.getSelection();
-        if (!selection.rangeCount) return;
-
-        const range = selection.getRangeAt(0);
-
-        if (range.collapsed) return;
-
-        currentRange = range;
-
-        // prevent annotating inside annotation
-        let node = range.commonAncestorContainer;
-        if (node.nodeType === 3) node = node.parentElement;
-
-        if (node?.closest(".annotation")) {
-            alert("Cannot annotate inside another annotation");
-            return;
-        }
-
-        const rect = currentRange.getBoundingClientRect();
-        showAnnotationPopover(rect);
-    });
-
-
-    preview.addEventListener("click", (e) => {
-        if (!currentHTMLFileHandle) return;
-
-        const el = e.target.closest(".annotation");
-        if (!el) return;
-
-        activeAnnotation = el;
-        currentRange = null;
-
-        input.value = el.dataset.note || "";
-
-        const rect = el.getBoundingClientRect();
-        showAnnotationPopover(rect);
-    });
-
-
-    cancelBtn.addEventListener("click", () => {
-        hidePopover();
-    });
-
-
-    saveBtn.addEventListener("click", async () => {
-        const text = input.value.trim();
-        if (!text) return;
-
-        if (currentRange) {
-            wrapSelection(currentRange, text);
-        }
-
-        else if (activeAnnotation) {
-            activeAnnotation.dataset.note = text;
-        }
-
-        window.getSelection().removeAllRanges();
-
-        hidePopover();
-        await saveFile();
-    });
-
-
-    deleteBtn.addEventListener("click", async () => {
-        if (!activeAnnotation) return;
-
-        const parent = activeAnnotation.parentNode;
-
-        while (activeAnnotation.firstChild) {
-            parent.insertBefore(activeAnnotation.firstChild, activeAnnotation);
-        }
-
-        parent.removeChild(activeAnnotation);
-
-        hidePopover();
-        await saveFile();
-    });
-
-
-    document.addEventListener("click", (e) => {
-        if (!popover.contains(e.target) && !e.target.closest(".annotation")) {
-            hidePopover();
-        }
-    });
+    // popup buttons
+    document.getElementById("annotation-cancel").onclick = closePopover;
+    document.getElementById("annotation-save").onclick = saveAnnotation;
+    document.getElementById("annotation-delete").onclick = deleteAnnotation;
 }
 
+/* ---------------- SELECTION -> NEW ANNOTATION ---------------- */
 
-function wrapSelection(range, annotationText) {
+function handleTextSelection() {
+    const selection = window.getSelection();
+    if (!selection || selection.isCollapsed) return;
+
+    const range = selection.getRangeAt(0);
+
+    // ensure selection is inside preview
+    const preview = document.getElementById("htmlpreview");
+    if (!preview.contains(range.commonAncestorContainer)) return;
+
+    selectedRange = range;
+
+    showPopoverAtRange(range);
+
+    document.getElementById("annotation-input").value = "";
+    activeAnnotationEl = null;
+}
+
+/* ---------------- CLICK EXISTING ANNOTATION ---------------- */
+
+function handleAnnotationClick(e) {
+    const el = e.target.closest(".annotation");
+    if (!el) return;
+
+    e.preventDefault();
+
+    activeAnnotationEl = el;
+    selectedRange = null;
+
+    const rect = el.getBoundingClientRect();
+    showPopoverAtPosition(rect.left, rect.top);
+
+    document.getElementById("annotation-input").value =
+        el.getAttribute("data-annotation-text") || "";
+}
+
+/* ---------------- POPUP ---------------- */
+
+function showPopoverAtRange(range) {
+    const rect = range.getBoundingClientRect();
+    showPopoverAtPosition(rect.left, rect.top);
+}
+
+function showPopoverAtPosition(x, y) {
+    const popover = document.getElementById("annotation-popover");
+
+    popover.classList.remove("hidden");
+
+    popover.style.left = `${x + window.scrollX}px`;
+    popover.style.top = `${y + window.scrollY - 80}px`;
+}
+
+function closePopover() {
+    const popover = document.getElementById("annotation-popover");
+    popover.classList.add("hidden");
+
+    selectedRange = null;
+    activeAnnotationEl = null;
+
+    window.getSelection().removeAllRanges();
+}
+
+/* ---------------- SAVE ---------------- */
+
+function saveAnnotation() {
+    const text = document.getElementById("annotation-input").value.trim();
+    if (!text) return;
+
+    const preview = document.getElementById("htmlpreview");
+
+    // CASE 1: EDIT EXISTING
+    if (activeAnnotationEl) {
+        activeAnnotationEl.setAttribute("data-annotation-text", text);
+        closePopover();
+        return;
+    }
+
+    // CASE 2: CREATE NEW
+    if (!selectedRange) return;
+
     const span = document.createElement("span");
-
-    const id = "a-" + Date.now();
-
-    span.classList.add("annotation");
-    span.setAttribute("data-id", id);
-    span.setAttribute("data-note", annotationText);
+    span.className = "annotation";
+    span.setAttribute("data-annotation-id", generateId());
+    span.setAttribute("data-annotation-text", text);
 
     try {
-        const safeRange = range.cloneRange();
-        safeRange.surroundContents(span);
-    } catch (err) {
-        alert("Selection too complex. Try selecting within one paragraph.");
-        console.error(err);
+        selectedRange.surroundContents(span);
+    } catch (e) {
+        console.warn("Invalid selection for annotation:", e);
+        return;
     }
+
+    closePopover();
 }
 
+/* ---------------- DELETE ---------------- */
 
-async function saveFile() {
-    if (!currentHTMLFileHandle) return;
+function deleteAnnotation() {
+    if (!activeAnnotationEl) {
+        closePopover();
+        return;
+    }
 
-    const writable = await currentHTMLFileHandle.createWritable();
+    const parent = activeAnnotationEl.parentNode;
 
-    const html = document.getElementById("htmlpreview").innerHTML;
+    // unwrap span
+    while (activeAnnotationEl.firstChild) {
+        parent.insertBefore(activeAnnotationEl.firstChild, activeAnnotationEl);
+    }
 
-    await writable.write(html);
-    await writable.close();
+    parent.removeChild(activeAnnotationEl);
+
+    closePopover();
+}
+
+/* ---------------- UTIL ---------------- */
+
+function generateId() {
+    return `ann-${Date.now()}-${annotationCounter++}`;
 }
