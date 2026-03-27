@@ -389,8 +389,16 @@ body {
         flex-wrap: wrap;
     }
 
+    .builder-panel,
     .level1-section {
-        flex: 1;
+        flex: 1 1 100%;
+        min-width: 100%;
+    }
+
+    .builder-panel {
+        position: static;
+        max-height: none;
+        overflow: visible;
     }
 }
 
@@ -579,7 +587,8 @@ body {
     max-height: calc(100vh - 40px);
     overflow-y: auto;
 
-    flex: 1;
+    flex: 1 1 0;
+    min-width: 320px;
 }
 
 
