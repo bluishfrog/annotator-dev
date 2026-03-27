@@ -809,11 +809,11 @@ h3 {
 /* ---------- Annotation ---------- */
 
 .annotation {
-    background-color: rgba(255, 230, 150, 0.6);
+    background-color: #b6e9f7;
     cursor: pointer;
     border-radius: 3px;
 }
 
 .annotation:hover {
-    background-color: rgba(255, 210, 120, 0.9);
+    background-color: #b2e4f5;
 }
