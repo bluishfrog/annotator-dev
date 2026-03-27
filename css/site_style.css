@@ -551,6 +551,60 @@ body {
 }
 
 
+/* ---------- Collapsible Builder Panel ---------- */
+
+.builder-panel {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+/* Collapse button */
+.collapse-toggle {
+    position: absolute;
+    top: 10px;
+    right: -12px;
+
+    background-color: #C9F2FF;
+    border: none;
+    border-radius: 50%;
+
+    width: 24px;
+    height: 24px;
+
+    cursor: pointer;
+    font-size: 14px;
+    color: #33337C;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    transition: transform 0.2s ease;
+}
+
+.collapse-toggle:hover {
+    transform: scale(1.1);
+}
+
+/* Collapsed state */
+.level1-container.collapsed .builder-panel {
+    flex: 0 0 40px; /* small sliver */
+    padding: 20px 5px;
+    overflow: hidden;
+}
+
+/* Hide content when collapsed */
+.level1-container.collapsed .builder-panel .level2-container {
+    display: none;
+}
+
+/* Rotate arrow */
+.level1-container.collapsed .collapse-toggle {
+    transform: rotate(180deg);
+}
+
+
 /* ---------- File Actions & Buttons ---------- */
 .file-actions {
     display: flex;

@@ -40,3 +40,9 @@ function switchTabSelect(selectElement) {
         matchingButton.classList.add('active');
     }
 }
+
+
+function toggleBuilderPanel() {
+    const container = document.querySelector('.level1-container');
+    container.classList.toggle('collapsed');
+}
