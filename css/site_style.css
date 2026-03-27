@@ -160,7 +160,9 @@ body {
         box-shadow: none;
         border-radius: 0;
     }
-}/* ---------- Navigation ---------- */
+}
+
+/* ---------- Navigation ---------- */
 
 .site-nav {
     background-color: #C9F2FF;
@@ -283,7 +285,7 @@ body {
 
     /* OPEN state */
     .nav-content.menu-open .nav-links {
-        max-height: 500px;   
+        max-height: 500px;
         opacity: 1;
         transform: translateY(0);
         padding-top: 10px;
@@ -375,24 +377,16 @@ body {
     margin-top: 20px;
     margin-bottom: 20px;
 
-    flex-wrap: nowrap; 
+    flex-wrap: nowrap;
     flex: 1;
 
     align-items: flex-start;
 }
 
-
 @media (max-width: 700px) {
 
     .level1-container {
         flex-wrap: wrap;
-    }
-
-    .builder-panel {
-        position: static;
-        max-height: none;
-        overflow: visible;
-        flex: 1;
     }
 }
 
@@ -470,7 +464,8 @@ body {
 /* ---------- Tabbed Card ---------- */
 
 .tabbed-card {
-    padding: 0; /* override default card padding */
+    padding: 0;
+    /* override default card padding */
     overflow: hidden;
 }
 
@@ -484,7 +479,7 @@ body {
 
 /* Individual tab buttons */
 .tab-button {
-    flex:1;
+    flex: 1;
     border: 1px solid #d0d0d0;
     border-bottom: none;
     background-color: #eaeaea;
@@ -568,6 +563,7 @@ body {
     }
 }
 
+
 /* ---------- Builder Panel ---------- */
 
 .builder-panel {
@@ -638,24 +634,24 @@ h3 {
     margin-bottom: 1em !important;
 }
 
-#htmlpreview .meta > h1 {
+#htmlpreview .meta>h1 {
     margin-top: 1em !important;
 }
 
-#htmlpreview #preface .meta > p {
+#htmlpreview #preface .meta>p {
     font-weight: 500;
     margin: 1.5em 0 0.5em 0;
 }
 
-#htmlpreview .meta > blockquote.userstuff {
+#htmlpreview .meta>blockquote.userstuff {
     font-weight: 400;
 }
 
-#htmlpreview .meta > blockquote.userstuff p {
+#htmlpreview .meta>blockquote.userstuff p {
     font-weight: 400;
 }
 
-#htmlpreview #afterword .meta > div p:first-of-type {
+#htmlpreview #afterword .meta>div p:first-of-type {
     font-weight: 500;
     margin: 1.5em 0 0.5em 0;
 }
