@@ -381,6 +381,9 @@ body {
     flex: 1;
 
     align-items: flex-start;
+
+    width: 100%;
+    min-width: 0;
 }
 
 @media (max-width: 700px) {
@@ -602,19 +605,24 @@ body {
 .level1-container.collapsed .builder-panel {
     max-width: 0;
     min-width: 0;
+    flex: 0 0 0;
 
     opacity: 0;
 
     transform: translateX(-20px);
 
+    pointer-events: none;
+
     overflow: hidden;
 
-    pointer-events: none;
+    margin: 0;
+    padding: 0;
 }
 
 .level1-container.collapsed .level1-section {
     flex: 1 1 100%;
 }
+
 
 
 /* ---------- File Actions & Buttons ---------- */
