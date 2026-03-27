@@ -387,7 +387,7 @@ body {
 
     .level1-container {
         flex-wrap: wrap;
-        position: fixed;
+        position: relative;
     }
 
     .builder-panel,
@@ -590,21 +590,28 @@ body {
 
     flex: 1 1 0;
     min-width: 320px;
-}
 
-.builder-panel {
+    max-width: 600px;
+
     transition:
-        flex 0.35s ease,
-        min-width 0.35s ease,
-        max-width 0.35s ease;
+        max-width 0.35s ease,
+        opacity 0.25s ease,
+        transform 0.35s ease;
 }
 
 .level1-container.collapsed .builder-panel {
-    flex: 0 0 48px;
-    min-width: 48px;
-    max-width: 48px;
-    position: sticky;
+    max-width: 0;
+    min-width: 0;
+
+    opacity: 0;
+
+    transform: translateX(-20px);
+
+    overflow: hidden;
+
+    pointer-events: none;
 }
+
 
 .level1-container.collapsed .builder-panel .level2-container {
     opacity: 0;
@@ -614,39 +621,10 @@ body {
     transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
-.level1-container.collapsed .builder-panel::before {
-    content: "Settings";
 
-    position: absolute;
-    top: 50%;
-    left: 0;
-
-    transform: translateY(-50%);
-
-    width: 48px;
-    height: 120px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    writing-mode: vertical-rl;
-    text-orientation: mixed;
-
-    font-size: 14px;
-    font-weight: 500;
-    color: #33337C;
-
-    background: #eaeaea;
-
-    border: 1px solid #d0d0d0;
-    border-left: none;
-
-    border-radius: 0 10px 10px 0;
-
-    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+.level1-container.collapsed .level1-section {
+    flex: 1 1 100%;
 }
-
 
 
 /* ---------- File Actions & Buttons ---------- */
