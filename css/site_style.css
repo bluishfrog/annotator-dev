@@ -602,8 +602,8 @@ h3 {
 
 /* ---------- AO3 de-layouting ---------- */
 
-#htmlpreview .meta > h1 {
-    margin: 2.5em 0 0.5em 0;
+#htmlpreview .meta h1 {
+    margin-top: 2em;
 }
 
 #htmlpreview .meta > p {
