@@ -553,6 +553,7 @@ body {
 
 /* ---------- Collapsible Builder Panel ---------- */
 
+/* left panel wrapper MUST be the flex item that collapses */
 .builder-panel {
     position: sticky;
     top: 20px;
@@ -561,24 +562,50 @@ body {
     max-height: calc(100vh - 40px);
     overflow-y: auto;
 
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    flex: 1;
+    min-width: 320px;
+
+    opacity: 1;
+    transform: translateX(0);
+
+    transition: 
+        opacity 0.3s ease,
+        transform 0.3s ease,
+        flex 0.3s ease,
+        min-width 0.3s ease,
+        margin 0.3s ease;
 }
 
-/* normal state */
-.builder-panel {
+/* ---------- OPEN STATE ---------- */
+.level1-container:not(.collapsed) .builder-panel {
+    flex: 1;
+    min-width: 320px;
+
     opacity: 1;
     transform: translateX(0);
 }
 
-/* collapsed state */
+/* ---------- COLLAPSED STATE  ---------- */
 .level1-container.collapsed .builder-panel {
+    flex: 0;
+    min-width: 0;
+
     opacity: 0;
     transform: translateX(-20px);
+
+    margin: 0;
+    padding: 0;
+
+    overflow: hidden;
 
     pointer-events: none;
 }
 
-/* collapse button (open state - inside panel, top right) */
+.level1-container.collapsed .level1-section:last-child {
+    flex: 1 1 100%;
+}
+
+/* ---------- collapse button (open state) ---------- */
 .collapse-toggle {
     position: absolute;
 
@@ -608,12 +635,13 @@ body {
     transition: all 0.25s ease;
 }
 
+/* hover */
 .collapse-toggle:hover {
     transform: scale(1.1);
     background-color: #b2e4f5;
 }
 
-/* collapse button (collapsed state - floating top left) */
+/* ---------- COLLAPSED BUTTON POSITION ---------- */
 .level1-container.collapsed .collapse-toggle {
     position: fixed;
 
