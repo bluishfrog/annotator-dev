@@ -46,23 +46,27 @@ function initAnnotationSystem() {
             return;
         }
 
-        const selection = window.getSelection();
-        if (!selection.rangeCount) return;
 
-        const range = selection.getRangeAt(0);
-        if (range.collapsed) return;
+        setTimeout(() => {
+            const selection = window.getSelection();
+            if (!selection.rangeCount) return;
 
-        const container = range.commonAncestorContainer;
-        if (container.parentElement?.closest(".annotation")) {
-            alert("Cannot annotate inside another annotation");
-            return;
-        }
+            const range = selection.getRangeAt(0);
+            if (range.collapsed) return;
 
-        currentRange = range.cloneRange();
-        activeAnnotation = null;
+            const container = range.commonAncestorContainer;
+            if (container.parentElement?.closest(".annotation")) {
+                alert("Cannot annotate inside another annotation");
+                return;
+            }
 
-        const rect = range.getBoundingClientRect();
-        showAnnotationPopover(rect);
+            currentRange = range.cloneRange();
+            activeAnnotation = null;
+
+            const rect = range.getBoundingClientRect();
+            showAnnotationPopover(rect);
+
+        }, 0);
     });
 
 
