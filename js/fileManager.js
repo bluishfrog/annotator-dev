@@ -40,4 +40,5 @@ function loadHTMLIntoPreview(htmlContent) {
     previewRoot.innerHTML = `<div id="htmlpreview">${htmlContent}</div>`;
 
     initAnnotationSystem();
+    updatePreview();
 }

@@ -154,8 +154,8 @@ function saveAnnotation() {
     }
 
     saveFile()
-    updatePreview();
     closePopover();
+    updatePreview();
 }
 
 /* ---------------- DELETE ---------------- */
@@ -176,8 +176,8 @@ function deleteAnnotation() {
     parent.removeChild(activeAnnotationEl);
 
     saveFile()
-    updatePreview();
     closePopover();
+    updatePreview();
 }
 
 /* ---------------- UTIL ---------------- */
@@ -240,3 +240,16 @@ function updateFormat() {
 
     updatePreview();
 }
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    initAnnotationSystem();
+
+    document
+        .getElementById("annotation-template")
+        .addEventListener("input", updatePreview);
+
+    document
+        .getElementById("preview-mode-toggle")
+        .addEventListener("change", togglePreviewMode);
+});

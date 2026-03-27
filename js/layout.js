@@ -97,3 +97,13 @@ function toggleMenu(button) {
     nav.classList.toggle('menu-open');
 }
 
+
+function togglePreviewMode(e) {
+    const isCode = e.target.checked;
+
+    document.getElementById("annotation-preview-output").style.display =
+        isCode ? "block" : "none";
+
+    document.getElementById("annotation-preview-rendered").style.display =
+        isCode ? "none" : "block";
+}
