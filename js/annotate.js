@@ -6,11 +6,6 @@ let annotationCounter = 0;
 
 function initAnnotationSystem() {
 
-    if (!currentHTMLFileHandle) {
-        alert("You need to load your own HTML first before you can start annotating :)");
-        return;
-    }
-
     const preview = document.getElementById("htmlpreview");
 
     if (!preview) return;
@@ -46,6 +41,11 @@ function handleTextSelection() {
     if (!selection || selection.isCollapsed) return;
 
     const range = selection.getRangeAt(0);
+
+    if (!currentHTMLFileHandle) {
+        alert("You need to load your own HTML first before you can start annotating :)");
+        return;
+    }
 
     // ensure selection is inside preview
     const preview = document.getElementById("htmlpreview");
