@@ -628,6 +628,10 @@ h3 {
     margin: 1.5em 0 0.5em 0;
 }
 
+#htmlpreview #afterword .meta blockquote.userstuff p {
+    font-weight: 400 !important;
+}
+
 #htmlpreview .userstuff {
     font-family: inherit !important;
     font-size: 1rem;
