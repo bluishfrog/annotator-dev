@@ -642,3 +642,22 @@ h3 {
 #htmlpreview .userstuff span {
     font-family: inherit;
 }
+
+/* Reset AO3 weird layout */
+#htmlpreview .meta dl.tags {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 10px;
+    row-gap: 6px;
+}
+
+/* Reset their margins */
+#htmlpreview .meta dt,
+#htmlpreview .meta dd {
+    margin: 0 !important;
+}
+
+/* Optional: make labels slightly stronger */
+#htmlpreview .meta dt {
+    font-weight: 500;
+}
