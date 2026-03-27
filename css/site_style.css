@@ -48,7 +48,7 @@ body {
 
 /* ---------- Navigation ---------- */
 .site-nav {
-    background-color: rgba(51, 51, 124, 0.5);
+    background-color: #b2e4f5;
     margin-bottom: 10px;
     padding: 10px 20px;
 }
@@ -165,7 +165,7 @@ body {
 /* ---------- Navigation ---------- */
 
 .site-nav {
-    background-color: rgba(51, 51, 124, 0.5);
+    background-color: #b2e4f5;
     margin-bottom: 10px;
     padding: 10px 20px;
 }
@@ -265,7 +265,7 @@ body {
         display: flex;
         flex-direction: column;
 
-        background-color: rgba(51, 51, 124, 0.5);
+        background-color: #b2e4f5;
         padding: 0 20px;
 
         max-height: 0;
@@ -317,7 +317,7 @@ body {
     align-items: center;
     padding: 20px;
     border-top: 1px solid #aedae8;
-    background-color: rgba(51, 51, 124, 0.5);
+    background-color: #b2e4f5;
     font-size: 14px;
     color: #333;
     margin-top: 40px;
@@ -560,7 +560,7 @@ body {
 
 .tab-dropdown select:focus {
     outline: none;
-    border-color: rgba(51, 51, 124, 0.5);
+    border-color: #b2e4f5;
     box-shadow: 0 0 0 2px rgba(201, 242, 255, 0.5);
 }
 
@@ -641,7 +641,7 @@ body {
 }
 
 .file-actions button {
-    background-color: rgba(51, 51, 124, 0.5);
+    background-color: #b2e4f5;
     border: none;
     border-radius: 8px;
     padding: 8px 16px;
