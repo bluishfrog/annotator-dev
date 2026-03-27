@@ -618,22 +618,35 @@ body {
     content: "Settings";
 
     position: absolute;
-    left: 0;
     top: 50%;
+    left: 0;
 
-    transform: translateY(-50%) rotate(-90deg);
+    transform: translateY(-50%);
 
     width: 48px;
-    text-align: center;
+    height: 120px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
 
     font-size: 14px;
+    font-weight: 500;
     color: #33337C;
 
-    background-color: #eaeaea;
-    border-right: 1px solid #d0d0d0;
+    background: #eaeaea;
 
-    padding: 8px 0;
+    border: 1px solid #d0d0d0;
+    border-left: none;
+
+    border-radius: 0 10px 10px 0;
+
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
 }
+
 
 
 /* ---------- File Actions & Buttons ---------- */
