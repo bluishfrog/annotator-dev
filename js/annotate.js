@@ -54,19 +54,19 @@ function initAnnotationSystem() {
 
         if (range.collapsed) return;
 
-        currentRange = range.cloneRange();
+        currentRange = range;
 
         // prevent annotating inside annotation
-        const container = range.commonAncestorContainer;
-        if (container.parentElement?.closest(".annotation")) {
+        let node = range.commonAncestorContainer;
+        if (node.nodeType === 3) node = node.parentElement;
+
+        if (node?.closest(".annotation")) {
             alert("Cannot annotate inside another annotation");
             return;
         }
 
         const rect = currentRange.getBoundingClientRect();
         showAnnotationPopover(rect);
-
-        selection.removeAllRanges();
     });
 
 
@@ -144,7 +144,8 @@ function wrapSelection(range, annotationText) {
     span.setAttribute("data-note", annotationText);
 
     try {
-        range.surroundContents(span);
+        const safeRange = range.cloneRange();
+        safeRange.surroundContents(span);
     } catch (err) {
         alert("Selection too complex. Try selecting within one paragraph.");
         console.error(err);
