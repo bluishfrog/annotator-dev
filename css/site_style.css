@@ -602,8 +602,17 @@ h3 {
 
 /* ---------- AO3 de-layouting ---------- */
 
-#htmlpreview .meta p:first-of-type {
+#htmlpreview .meta > p {
     font-weight: 500;
+    margin: 1.5em 0 0.5em 0;
+}
+
+#htmlpreview .meta > blockquote.userstuff {
+    font-weight: 400;
+}
+
+#htmlpreview .meta > blockquote.userstuff p {
+    font-weight: 400;
 }
 
 #htmlpreview .userstuff {
