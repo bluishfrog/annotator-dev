@@ -1208,6 +1208,12 @@ h3 {
 
 /* ---------- Button ---------- */
 
+.annot-preview-button {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 12px;
+}
+
 .annot-preview-button button {
     background-color: #C9F2FF ;
     border: none;
