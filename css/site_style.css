@@ -900,3 +900,110 @@ h3 {
     from { opacity: 0; transform: translateY(-5px); }
     to { opacity: 1; transform: translateY(0); }
 }
+
+
+
+
+/* ---------- Popover ---------- */
+.annotation-popover {
+    position: absolute;
+    z-index: 3000;
+
+    width: 260px;
+    padding: 12px;
+
+    background: #ffffff;
+    border-radius: 10px;
+    border: 1px solid #d0d0d0;
+
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    animation: fadeIn 0.15s ease;
+}
+
+.annotation-popover.hidden {
+    display: none;
+}
+
+/* textarea */
+#annotation-input {
+    width: 100%;
+    min-height: 70px;
+    resize: vertical;
+
+    border-radius: 8px;
+    border: 1px solid #d0d0d0;
+    padding: 8px;
+
+    font-family: inherit;
+    font-size: 14px;
+}
+
+/* buttons */
+.annotation-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.annotation-actions button {
+    flex: 1;
+
+    background-color: #C9F2FF;
+    border: none;
+    border-radius: 8px;
+
+    padding: 6px 10px;
+    cursor: pointer;
+
+    font-size: 13px;
+
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.annotation-actions button:hover {
+    background-color: #b2e4f5;
+    transform: translateY(-1px);
+}
+
+
+#annotation-save {
+    background-color: #C9F2FF;
+}
+
+#annotation-save:hover {
+    background-color: #b6e9f7;
+}
+
+#annotation-cancel {
+    background-color: #eee;
+}
+
+#annotation-cancel:hover {
+    background-color: #ddd;
+}
+
+#annotation-delete {
+    background-color: #ffd6d6;
+}
+
+#annotation-delete:hover {
+    background-color: #ffb3b3;
+}
+
+
+/* small animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
