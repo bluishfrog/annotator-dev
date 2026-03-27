@@ -602,6 +602,14 @@ h3 {
 
 /* ---------- AO3 de-layouting ---------- */
 
+#htmlpreview .meta dl.tags {
+    margin-bottom: 1em !important;
+}
+
+#htmlpreview .meta > h1 {
+    margin-top: 1em !important;
+}
+
 #htmlpreview .meta > p {
     font-weight: 500;
     margin: 1.5em 0 0.5em 0;
