@@ -1135,21 +1135,77 @@ h3 {
     padding-top: 8px;
 }
 
-/* ---------- Toggle ---------- */
+/* ---------- Preview Header Layout ---------- */
 
-.annot-preview-toggle {
-    margin-top: 10px;
-    font-size: 13px;
-    color: #555;
+.annot-preview-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
+    margin-bottom: 8px;
+}
+
+/* remove default margin so alignment is perfect */
+.annot-preview-header h3 {
+    margin: 0;
+}
+
+/* ---------- Custom Toggle ---------- */
+
+.annot-toggle {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
+
+    font-size: 13px;
+    color: #33337C;
+
+    cursor: pointer;
+    user-select: none;
 }
 
-.annot-preview-toggle input {
+/* hide default checkbox */
+.annot-toggle input {
+    appearance: none;
+    -webkit-appearance: none;
+
+    width: 16px;
+    height: 16px;
+
+    border: 1.5px solid #33337C;
+    border-radius: 4px;
+
+    display: inline-block;
+    position: relative;
+
     cursor: pointer;
+    transition: all 0.15s ease;
 }
+
+/* hover */
+.annot-toggle input:hover {
+    background-color: rgba(51, 51, 124, 0.08);
+}
+
+/* checked state */
+.annot-toggle input:checked {
+    background-color: #33337C;
+    border-color: #33337C;
+}
+
+/* checkmark */
+.annot-toggle input:checked::after {
+    content: "✓";
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -55%);
+
+    font-size: 12px;
+    color: white;
+}
+
 
 /* ---------- Scrollbar (matches your soft UI) ---------- */
 
