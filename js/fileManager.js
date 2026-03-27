@@ -33,6 +33,18 @@ function loadHTMLIntoPreview(htmlContent) {
 
     previewRoot.innerHTML = `<div id="htmlpreview">${htmlContent}</div>`;
 
-    // 👇 IMPORTANT: initialize annotation AFTER loading
+    // important: initialize annotation AFTER loading
     initAnnotationSystem();
+}
+
+
+async function saveHTMLPreviewToFile() {
+    if (!currentHTMLFileHandle) return;
+
+    const writable = await currentHTMLFileHandle.createWritable();
+
+    const html = document.getElementById("htmlpreview").innerHTML;
+
+    await writable.write(html);
+    await writable.close();
 }

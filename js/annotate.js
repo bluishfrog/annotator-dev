@@ -30,9 +30,11 @@ function initAnnotationSystem() {
         if (!note) return;
 
         wrapSelection(range, note);
+        saveHTMLPreviewToFile();
 
         selection.removeAllRanges();
     });
+
 
     // CLICK → SHOW ANNOTATION
     preview.addEventListener("click", (e) => {
@@ -66,7 +68,7 @@ function wrapSelection(range, annotationText) {
 }
 
 
-// OPTIONAL SAVE FUNCTION (can stay here or fileManager)
+// SAVE FUNCTION
 async function saveFile() {
     if (!currentHTMLFileHandle) return;
 
