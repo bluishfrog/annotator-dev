@@ -18,6 +18,8 @@ function initAnnotationSystem() {
     document.getElementById("annotation-cancel").onclick = closePopover;
     document.getElementById("annotation-save").onclick = saveAnnotation;
     document.getElementById("annotation-delete").onclick = deleteAnnotation;
+
+    updatePreview();
 }
 
 /* ---------------- Save File ---------------- */
@@ -152,7 +154,7 @@ function saveAnnotation() {
     }
 
     saveFile()
-
+    updatePreview();
     closePopover();
 }
 
@@ -174,7 +176,7 @@ function deleteAnnotation() {
     parent.removeChild(activeAnnotationEl);
 
     saveFile()
-
+    updatePreview();
     closePopover();
 }
 
@@ -185,3 +187,56 @@ function generateId() {
 }
 
 
+
+/* ---------------- ANNOTATION CONSTRUCTION ---------------- */
+
+function extractAnnotations(doc) {
+    const annotations = [];
+
+    doc.querySelectorAll(".annotation").forEach(span => {
+        const text = span.textContent;
+        const annotationText = span.dataset.annotationText;
+        const chapterEl = doc.querySelector("#chapters .heading");
+
+        annotations.push({
+            quoted_text: text,
+            annotation_text: annotationText,
+            chapter: chapterEl ? chapterEl.textContent.trim() : "Unknown"
+        });
+    });
+
+    return annotations;
+}
+
+
+function renderTemplate(template, data) {
+    return template
+        .replaceAll("{chapter}", data.chapter)
+        .replaceAll("{quoted_text}", data.quoted_text)
+        .replaceAll("{annotation_text}", data.annotation_text);
+}
+
+
+function buildAnnotationPreview(doc) {
+    const template = document.getElementById("annotation-template").value;
+    const annotations = extractAnnotations(doc);
+
+    return annotations.map(a => renderTemplate(template, a)).join("\n");
+}
+
+
+function updatePreview() {
+    const doc = document.getElementById("preview-frame").contentDocument;
+    const output = buildAnnotationPreview(doc);
+
+    document.getElementById("annotation-preview-output").innerHTML = output;
+
+    document.getElementById("annotation-template")
+        .addEventListener("input", updatePreview);
+}
+
+
+function updateFormat() {
+
+    updatePreview();
+}

@@ -81,9 +81,16 @@
                                 <div id="tab-annot" class="tab-pane">
                                     <p>Define how annotations should be rendered.</p>
 
+                                    // option to include meta data, default:not selected
+
+                                    // option to include chapter title, default: selected
+
                                     <textarea id="annotation-template"
-                                        style="width:100%; height:180px;"><b>Chapter {chapter}</b><p><q>{quoted_text}</q><br>--- {annotation_text}</p></textarea>
-                                    <small>Placeholders you can use: {chapter}, {quoted_text}, {annotation_text}</small>
+                                        style="width:100%; height:180px;"><q>{quoted_text}</q><br>--- {annotation_text}</p></textarea>
+                                    <small>Placeholders you can use: {quoted_text}, {annotation_text}</small>
+
+                                    // button to save format
+
                                 </div>
 
                             </div>
@@ -92,6 +99,18 @@
                         <div class="level2-card">
                             <h3>Annotation preview</h3>
                             <p>Placeholder</p>
+
+                            <div class="preview-toggle">
+                                <label>
+                                    <input type="checkbox" id="preview-mode-toggle">
+                                    Show HTML source
+                                </label>
+                            </div>
+
+                            <pre id="annotation-preview-output"></pre>
+                            <div id="annotation-preview-rendered"></div>
+
+
 
                         </div>
                     </div>
@@ -122,10 +141,10 @@
     </div>
 
     <!-- SCRIPTS -->
-    <script src="js/loadComponents.js"></script>
     <script src="js/annotate.js"></script>
     <script src="js/fileManager.js"></script>
     <script src="js/layout.js"></script>
+    <script src="js/loadComponents.js"></script>
     <script src="js/loadPlaceholderPreview.js"></script>
     <script src="js/toast.js"></script>
 
