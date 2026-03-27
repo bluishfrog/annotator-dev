@@ -28,8 +28,11 @@ async function assignHTMLFile() {
     }
 }
 
+
 function loadHTMLIntoPreview(htmlContent) {
     const previewRoot = document.getElementById('preview-frame');
+
+    originalHTMLContent = htmlContent;
 
     previewRoot.innerHTML = `<div id="htmlpreview">${htmlContent}</div>`;
 
@@ -43,8 +46,16 @@ async function saveHTMLPreviewToFile() {
 
     const writable = await currentHTMLFileHandle.createWritable();
 
-    const html = document.getElementById("htmlpreview").innerHTML;
+    const updatedInnerHTML = document.getElementById("htmlpreview").innerHTML;
 
-    await writable.write(html);
+    // Replace ONLY the preview section in original HTML
+    let updatedFullHTML = originalHTMLContent;
+
+    updatedFullHTML = updatedFullHTML.replace(
+        /<div id="htmlpreview">[\s\S]*<\/div>/,
+        `<div id="htmlpreview">${updatedInnerHTML}</div>`
+    );
+
+    await writable.write(updatedFullHTML);
     await writable.close();
 }
