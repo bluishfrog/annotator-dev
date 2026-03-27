@@ -39,7 +39,8 @@ function initAnnotationSystem() {
     const deleteBtn = document.getElementById("annotation-delete");
 
 
-    preview.addEventListener("pointerup", () => {
+
+    preview.addEventListener("mouseup", () => {
 
         if (!currentHTMLFileHandle) {
             alert("You need to load your own HTML first before you can start annotating :)");
@@ -53,18 +54,14 @@ function initAnnotationSystem() {
 
         if (range.collapsed) return;
 
+        // prevent annotating inside annotation
         const container = range.commonAncestorContainer;
         if (container.parentElement?.closest(".annotation")) {
             alert("Cannot annotate inside another annotation");
             return;
         }
 
-        currentRange = range.cloneRange();
-        activeAnnotation = null;
-
-        const rect = range.getBoundingClientRect();
-
-        showAnnotationPopover(rect);
+        showAnnotationPopover(range);
 
         selection.removeAllRanges();
     });
