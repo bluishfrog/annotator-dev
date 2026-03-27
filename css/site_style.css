@@ -1107,6 +1107,7 @@ h3 {
 
 /* The actual preview area */
 .annot-preview-frame {
+    min-height: 100px;
     max-height: 260px;
     overflow-y: auto;
 
@@ -1115,7 +1116,7 @@ h3 {
     font-size: 14px;
     line-height: 1.5;
 
-    background-color: #fafafa;
+    background-color: #ffffff;
 }
 
 /* Styled content inside preview */
