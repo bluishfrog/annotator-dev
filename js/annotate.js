@@ -43,7 +43,7 @@ function handleTextSelection() {
     const range = selection.getRangeAt(0);
 
     if (!currentHTMLFileHandle) {
-        showToast("You need to load your own HTML first before you can start annotating :)", type=warning);
+        showToast("You need to load your own HTML first before you can start annotating :)", warning);
         return;
     }
 
@@ -64,7 +64,7 @@ function handleTextSelection() {
         : endContainer.closest?.(".annotation");
 
     if (startAnnotation || endAnnotation) {
-        showToast("You cannot create an annotation inside an existing annotation. Please select text outside the highlighted areas.", type=warning);
+        showToast("You cannot create an annotation inside an existing annotation. Please select text outside the highlighted areas.", warning);
         selection.removeAllRanges();
         return;
     }
