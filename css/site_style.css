@@ -610,7 +610,7 @@ h3 {
     margin-top: 1em !important;
 }
 
-#htmlpreview .preface .meta > p {
+#htmlpreview #preface .meta > p {
     font-weight: 500;
     margin: 1.5em 0 0.5em 0;
 }
@@ -623,7 +623,7 @@ h3 {
     font-weight: 400;
 }
 
-#htmlpreview .afterword .meta > div p:first-of-type {
+#htmlpreview #afterword .meta > div p:first-of-type {
     font-weight: 500;
     margin: 1.5em 0 0.5em 0;
 }
