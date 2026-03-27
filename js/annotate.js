@@ -33,20 +33,21 @@ async function overwriteSrcHTMLfile() {
     try {
         const updatedInnerHTML = preview.innerHTML;
 
-        const original = window.originalHTMLContent;
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(window.originalHTMLContent, "text/html");
 
-        if (!original) {
-            console.warn("Original HTML not stored.");
+        const previewContainer = doc.getElementById("htmlpreview");
+
+        if (!previewContainer) {
+            console.warn("No #htmlpreview found in original file.");
             return;
         }
 
-        // 3. Replace ONLY the preview container
-        let updatedFullHTML = original.replace(
-            /<div id="htmlpreview">[\s\S]*?<\/div>/,
-            `<div id="htmlpreview">${updatedInnerHTML}</div>`
-        );
+        // Replace ONLY inner content safely
+        previewContainer.innerHTML = updatedInnerHTML;
 
-        // 4. Write back to file
+        const updatedFullHTML = "<!DOCTYPE html>\n" + doc.documentElement.outerHTML;
+
         const writable = await window.currentHTMLFileHandle.createWritable();
         await writable.write(updatedFullHTML);
         await writable.close();
