@@ -602,7 +602,7 @@ body {
     flex: 0 0 48px;
     min-width: 48px;
     max-width: 48px;
-    position: relative; /* disables sticky cleanly */
+    position: sticky;
 }
 
 .level1-container.collapsed .builder-panel .level2-container {
