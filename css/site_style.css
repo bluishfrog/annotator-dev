@@ -387,7 +387,7 @@ body {
 
     .level1-container {
         flex-wrap: wrap;
-        position: relative;
+        position: fixed;
     }
 
     .builder-panel,
