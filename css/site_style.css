@@ -810,10 +810,93 @@ h3 {
 
 .annotation {
     background-color: #b6e9f7;
-    cursor: pointer;
     border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
 }
 
 .annotation:hover {
     background-color: #b2e4f5;
+}
+
+
+/* ---------- Annotation Popover ---------- */
+
+.annotation-popover {
+    position: absolute;
+    z-index: 3000;
+
+    width: 260px;
+    padding: 12px;
+
+    background: #ffffff;
+    border-radius: 10px;
+    border: 1px solid #d0d0d0;
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    animation: fadeIn 0.15s ease;
+}
+
+.annotation-popover.hidden {
+    display: none;
+}
+
+.annotation-popover textarea {
+    width: 100%;
+    resize: none;
+    min-height: 60px;
+
+    border-radius: 8px;
+    border: 1px solid #d0d0d0;
+    padding: 8px;
+
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.annotation-popover textarea:focus {
+    outline: none;
+    border-color: #C9F2FF;
+    box-shadow: 0 0 0 2px rgba(201, 242, 255, 0.5);
+}
+
+.annotation-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.annotation-actions button {
+    border: none;
+    border-radius: 8px;
+    padding: 6px 12px;
+
+    font-size: 13px;
+    cursor: pointer;
+}
+
+#annotation-save {
+    background-color: #C9F2FF;
+}
+
+#annotation-save:hover {
+    background-color: #b6e9f7;
+}
+
+#annotation-cancel {
+    background-color: #eee;
+}
+
+#annotation-cancel:hover {
+    background-color: #ddd;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
 }
