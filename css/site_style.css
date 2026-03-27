@@ -392,7 +392,7 @@ body {
         position: static;
         max-height: none;
         overflow: visible;
-        flex: 1 1 100%;
+        flex: 1;
     }
 }
 
