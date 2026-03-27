@@ -553,32 +553,6 @@ body {
 
 /* ---------- Collapsible Builder Panel ---------- */
 
-.level1-container {
-    display: flex;
-    gap: 20px;
-}
-
-/* open state */
-.builder-panel {
-    flex: 1 1 350px;
-}
-
-/* collapsed state */
-.level1-container.collapsed .builder-panel {
-    flex: 0 0 0px;
-    width: 0;
-    min-width: 0;
-
-    padding: 0;
-    margin: 0;
-    overflow: hidden;
-}
-
-/* IMPORTANT: allow right side to expand */
-.level1-container.collapsed .level1-section:last-child {
-    flex: 1 1 100%;
-}
-
 
 /* left panel wrapper MUST be the flex item that collapses */
 .builder-panel {
