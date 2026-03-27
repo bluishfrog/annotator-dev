@@ -48,7 +48,7 @@ body {
 
 /* ---------- Navigation ---------- */
 .site-nav {
-    background-color: #b2e4f5;
+    background-color: #dfefff;
     margin-bottom: 10px;
     padding: 10px 20px;
 }
@@ -165,7 +165,7 @@ body {
 /* ---------- Navigation ---------- */
 
 .site-nav {
-    background-color: #b2e4f5;
+    background-color: #dfefff;
     margin-bottom: 10px;
     padding: 10px 20px;
 }
@@ -265,7 +265,7 @@ body {
         display: flex;
         flex-direction: column;
 
-        background-color: #b2e4f5;
+        background-color: #dfefff;
         padding: 0 20px;
 
         max-height: 0;
@@ -317,7 +317,7 @@ body {
     align-items: center;
     padding: 20px;
     border-top: 1px solid #aedae8;
-    background-color: #b2e4f5;
+    background-color: #dfefff;
     font-size: 14px;
     color: #333;
     margin-top: 40px;
@@ -560,7 +560,7 @@ body {
 
 .tab-dropdown select:focus {
     outline: none;
-    border-color: #b2e4f5;
+    border-color: #dfefff;
     box-shadow: 0 0 0 2px rgba(201, 242, 255, 0.5);
 }
 
@@ -627,7 +627,7 @@ body {
 
     .level1-container.collapsed .builder-panel {
         transform: translateY(-20px);
-    }
+    }    
 }
 
 
@@ -641,7 +641,7 @@ body {
 }
 
 .file-actions button {
-    background-color: #b2e4f5;
+    background-color: #dfefff;
     border: none;
     border-radius: 8px;
     padding: 8px 16px;
