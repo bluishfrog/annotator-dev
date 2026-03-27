@@ -5,6 +5,11 @@ function initAnnotationSystem() {
 
     // TEXT SELECTION → CREATE ANNOTATION
     preview.addEventListener("mouseup", () => {
+
+        if (!currentHTMLFileHandle) {
+            return;
+        }
+
         const selection = window.getSelection();
 
         if (!selection.rangeCount) return;
@@ -30,6 +35,9 @@ function initAnnotationSystem() {
 
     // CLICK → SHOW ANNOTATION
     preview.addEventListener("click", (e) => {
+
+        if (!currentHTMLFileHandle) return;
+
         const el = e.target.closest(".annotation");
         if (!el) return;
 
