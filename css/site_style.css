@@ -388,6 +388,10 @@ body {
     .level1-container {
         flex-wrap: wrap;
     }
+
+    .level1-section {
+        flex: 1;
+    }
 }
 
 .level1-container:last-child {
