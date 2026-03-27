@@ -54,6 +54,8 @@ function initAnnotationSystem() {
 
         if (range.collapsed) return;
 
+        currentRange = range.cloneRange();
+
         // prevent annotating inside annotation
         const container = range.commonAncestorContainer;
         if (container.parentElement?.closest(".annotation")) {
@@ -61,7 +63,8 @@ function initAnnotationSystem() {
             return;
         }
 
-        showAnnotationPopover(range);
+        const rect = currentRange.getBoundingClientRect();
+        showAnnotationPopover(rect);
 
         selection.removeAllRanges();
     });
