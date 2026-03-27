@@ -612,16 +612,6 @@ body {
     pointer-events: none;
 }
 
-
-.level1-container.collapsed .builder-panel .level2-container {
-    opacity: 0;
-    pointer-events: none;
-    transform: translateX(-10px);
-
-    transition: opacity 0.2s ease, transform 0.2s ease;
-}
-
-
 .level1-container.collapsed .level1-section {
     flex: 1 1 100%;
 }
