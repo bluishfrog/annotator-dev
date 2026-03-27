@@ -19,6 +19,44 @@ function initAnnotationSystem() {
     document.getElementById("annotation-delete").onclick = deleteAnnotation;
 }
 
+/* ---------------- overwriteSrcHTMLfile ---------------- */
+
+async function overwriteSrcHTMLfile() {
+    if (!window.currentHTMLFileHandle) {
+        console.warn("No file handle available.");
+        return;
+    }
+
+    const preview = document.getElementById("htmlpreview");
+    if (!preview) return;
+
+    try {
+        const updatedInnerHTML = preview.innerHTML;
+
+        const original = window.originalHTMLContent;
+
+        if (!original) {
+            console.warn("Original HTML not stored.");
+            return;
+        }
+
+        // 3. Replace ONLY the preview container
+        let updatedFullHTML = original.replace(
+            /<div id="htmlpreview">[\s\S]*?<\/div>/,
+            `<div id="htmlpreview">${updatedInnerHTML}</div>`
+        );
+
+        // 4. Write back to file
+        const writable = await window.currentHTMLFileHandle.createWritable();
+        await writable.write(updatedFullHTML);
+        await writable.close();
+
+    } catch (err) {
+        console.error("Failed to overwrite HTML file:", err);
+    }
+}
+
+
 /* ---------------- SELECTION -> NEW ANNOTATION ---------------- */
 
 function handleTextSelection() {
@@ -113,6 +151,8 @@ function saveAnnotation() {
         return;
     }
 
+    overwriteSrcHTMLfile();
+
     closePopover();
 }
 
@@ -132,6 +172,8 @@ function deleteAnnotation() {
     }
 
     parent.removeChild(activeAnnotationEl);
+
+    overwriteSrcHTMLfile();
 
     closePopover();
 }
