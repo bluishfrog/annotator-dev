@@ -591,6 +591,49 @@ body {
     min-width: 320px;
 }
 
+.builder-panel {
+    transition:
+        flex 0.35s ease,
+        min-width 0.35s ease,
+        max-width 0.35s ease;
+}
+
+.level1-container.collapsed .builder-panel {
+    flex: 0 0 48px;
+    min-width: 48px;
+    max-width: 48px;
+    position: relative; /* disables sticky cleanly */
+}
+
+.level1-container.collapsed .builder-panel .level2-container {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-10px);
+
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.level1-container.collapsed .builder-panel::before {
+    content: "Settings";
+
+    position: absolute;
+    left: 0;
+    top: 50%;
+
+    transform: translateY(-50%) rotate(-90deg);
+
+    width: 48px;
+    text-align: center;
+
+    font-size: 14px;
+    color: #33337C;
+
+    background-color: #eaeaea;
+    border-right: 1px solid #d0d0d0;
+
+    padding: 8px 0;
+}
+
 
 /* ---------- File Actions & Buttons ---------- */
 .file-actions {
