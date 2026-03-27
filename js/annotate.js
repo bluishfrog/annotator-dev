@@ -7,6 +7,7 @@ function initAnnotationSystem() {
     preview.addEventListener("mouseup", () => {
 
         if (!currentHTMLFileHandle) {
+            alert("You need to load your own HTML first before you can start annotating :)");
             return;
         }
 
