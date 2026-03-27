@@ -374,7 +374,7 @@ body {
     gap: 20px;
     margin-top: 20px;
     margin-bottom: 20px;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     flex: 1;
 }
 
