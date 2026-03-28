@@ -1,6 +1,6 @@
 async function loadDevlog() {
     try {
-        const response = await fetch('/components/devlog.json');
+        const response = await fetch('components/devlog.json');
         const data = await response.json();
 
         const container = document.getElementById('devlog-container');
