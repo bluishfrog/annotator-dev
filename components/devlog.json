@@ -41,6 +41,13 @@
       "status": "would be cool might defeat me though",
       "date": "2026-03-28",
       "notes": "maybe a function to process something into a html? then I don't have to rework this into considering many other file types... I don't want to cry."
+    },
+    {
+      "type": "bug",
+      "description": "get toast types working",
+      "status": "pls",
+      "date": "2026-03-28",
+      "notes": "I might be initializing something the wrong way."
     }
   ]
 }
