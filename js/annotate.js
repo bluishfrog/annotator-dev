@@ -26,7 +26,10 @@ function initAnnotationSystem() {
 
     document.dispatchEvent(new Event("source-file-preview-updated"));
 
-
+    // MOBILE FIX (non-breaking)
+    if (window.matchMedia("(pointer: coarse)").matches) {
+        preview.addEventListener("touchend", handleMobileSelection);
+    }
 }
 
 /* ---------------- Save File ---------------- */
@@ -139,6 +142,55 @@ function handleTextSelection() {
     activeAnnotationEl = null;
 }
 
+/* ---------------- Mobile Selection ---------------- */
+
+function handleMobileSelection() {
+
+    setTimeout(() => {
+        const selection = window.getSelection();
+        if (!selection || selection.isCollapsed) return;
+
+        const range = selection.getRangeAt(0);
+
+        if (!currentHTMLFileHandle) {
+            showToast("You need to load your own HTML first before you can start annotating :)");
+            return;
+        }
+
+        const preview = document.getElementById("htmlpreview");
+        if (!preview.contains(range.commonAncestorContainer)) return;
+
+        // ignore tiny accidental taps (single-word selection spam)
+        const text = selection.toString().trim();
+        if (text.length < 2) return;
+
+        // prevent selection inside annotations (same logic as desktop)
+        const startContainer = range.startContainer;
+        const endContainer = range.endContainer;
+
+        const startAnnotation = startContainer.nodeType === 3
+            ? startContainer.parentElement?.closest(".annotation")
+            : startContainer.closest?.(".annotation");
+
+        const endAnnotation = endContainer.nodeType === 3
+            ? endContainer.parentElement?.closest(".annotation")
+            : endContainer.closest?.(".annotation");
+
+        if (startAnnotation || endAnnotation) {
+            showToast("You cannot create an annotation inside an existing annotation. Please select text outside the highlighted areas.");
+            selection.removeAllRanges();
+            return;
+        }
+
+        selectedRange = range;
+
+        showPopoverAtRange(range);
+
+        document.getElementById("annotation-input").value = "";
+        activeAnnotationEl = null;
+
+    }, 150);
+}
 
 /* ---------------- CLICK EXISTING ANNOTATION ---------------- */
 
