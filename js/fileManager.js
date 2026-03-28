@@ -21,31 +21,13 @@ async function assignHTMLFile() {
 
         document.getElementById("HTMLFile").textContent = file.name;
 
-        loadAnnotPreview(text);
         loadHTMLIntoPreview(text);
-        
 
+        document.dispatchEvent(new Event("source-file-uploaded"));
+        
     } catch (err) {
         console.log("File selection cancelled or failed:", err);
     }
-}
-
-function loadAnnotPreview(htmlContent) {
-
-    console.log("annot preview triggered");
-
-    const previewRoot = document.getElementById('annot-preview-frame');
-
-    console.log("frame:", previewRoot);
-
-    if (!previewRoot) {
-        alert("ANNOT FRAME NOT FOUND");
-        return;
-    }
-
-    previewRoot.style.border = "3px solid red";
-
-    previewRoot.innerHTML = "<h1>ANNOT TEST WORKS</h1>";
 }
 
 function loadHTMLIntoPreview(htmlContent) {
