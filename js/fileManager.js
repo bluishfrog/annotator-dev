@@ -43,23 +43,18 @@ function loadHTMLIntoPreview(htmlContent) {
     initAnnotationSystem();
 }
 
-async function loadAnnotPreviewTest() {
+async function loadAnnotPreview(htmlContent) {
 
-    try {
+    //this is for later
+    const annotHTML = constructAnnotHTML(htmlContent)
 
-        const annotHTML = constructAnnotHTML(htmlContent)
+    const response = await fetch('components/testannotfile.html');
+    const html = await response.text();
+    const previewRoot = document.getElementById('annot-preview-frame');
 
-        const response = await fetch('components/testannotfile.html');
-        const html = await response.text();
-        const previewRoot = document.getElementById('annot-preview-frame');
+    annotRawHTML = html;
+    annotRawHTML = annotRawHTML.replace(/<script[\s\S]*?>[\s\S]*?<\/script>/gi, '');
 
-        annotRawHTML = html;
-        annotRawHTML = annotRawHTML.replace(/<script[\s\S]*?>[\s\S]*?<\/script>/gi, '');
-
-        previewRoot.innerHTML = html
-
-    } catch (err) {
-        console.error('Failed to load test annot file:', err);
-    }
+    previewRoot.innerHTML = html
 
 }
