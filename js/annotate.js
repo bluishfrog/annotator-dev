@@ -28,35 +28,7 @@ function initAnnotationSystem() {
 
     // MOBILE FIX (non-breaking)
     if (window.matchMedia("(pointer: coarse)").matches) {
-
-        preview.addEventListener("touchend", () => {
-
-            // wait for browser to finalize selection AFTER touch
-            setTimeout(() => {
-
-                const selection = window.getSelection();
-                if (!selection || selection.isCollapsed) return;
-
-                const range = selection.getRangeAt(0);
-
-                const preview = document.getElementById("htmlpreview");
-                if (!preview.contains(range.commonAncestorContainer)) return;
-
-                const text = selection.toString().trim();
-
-                // ignore accidental taps
-                if (text.length < 2) return;
-
-                // reuse YOUR EXISTING desktop logic
-                selectedRange = range;
-                activeAnnotationEl = null;
-
-                document.getElementById("annotation-input").value = "";
-
-                showPopoverAtRange(range);
-
-            }, 250); // KEY: must be AFTER selection finalizes
-        });
+        document.addEventListener("selectionchange", handleMobileSelectionStable);
     }
 }
 
@@ -129,27 +101,27 @@ function handleSelectionChange() {
 
 /* ---------------- Mobile Selection ---------------- */
 
-function handleMobileSelection() {
+function handleMobileSelectionStable() {
 
-    setTimeout(() => {
+    clearTimeout(selectionTimeout);
+
+    selectionTimeout = setTimeout(() => {
+
         const selection = window.getSelection();
+
         if (!selection || selection.isCollapsed) return;
 
         const range = selection.getRangeAt(0);
 
-        if (!currentHTMLFileHandle) {
-            showToast("You need to load your own HTML first before you can start annotating :)");
-            return;
-        }
-
         const preview = document.getElementById("htmlpreview");
         if (!preview.contains(range.commonAncestorContainer)) return;
 
-        // ignore tiny accidental taps (single-word selection spam)
         const text = selection.toString().trim();
+
+        // ignore single-word / accidental taps
         if (text.length < 2) return;
 
-        // prevent selection inside annotations (same logic as desktop)
+        // prevent annotation inside annotation
         const startContainer = range.startContainer;
         const endContainer = range.endContainer;
 
@@ -161,20 +133,16 @@ function handleMobileSelection() {
             ? endContainer.parentElement?.closest(".annotation")
             : endContainer.closest?.(".annotation");
 
-        if (startAnnotation || endAnnotation) {
-            showToast("You cannot create an annotation inside an existing annotation. Please select text outside the highlighted areas.");
-            selection.removeAllRanges();
-            return;
-        }
+        if (startAnnotation || endAnnotation) return;
 
         selectedRange = range;
+        activeAnnotationEl = null;
+
+        document.getElementById("annotation-input").value = "";
 
         showPopoverAtRange(range);
 
-        document.getElementById("annotation-input").value = "";
-        activeAnnotationEl = null;
-
-    }, 150);
+    }, 120); // key: short debounce, runs AFTER selection stabilizes
 }
 
 /* ---------------- CLICK EXISTING ANNOTATION ---------------- */
