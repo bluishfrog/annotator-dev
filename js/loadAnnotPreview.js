@@ -19,15 +19,22 @@ async function extractAnnotations(doc) {
 }
 
 async function formatAnnots(annotations) {
+
+    const template = document.getElementById('annotation-template').value;
     
     const container = document.createElement('div');
 
     annotations.forEach(item => {
-        const annot = document.createElement('p');
 
-        annot.innerHTML = `<q>${item.quoted_text}</q><br>--- ${item.annotation_text}`;
+        let html = template;
 
-        container.appendChild(annot);
+        html = html.replace(/{quoted_text}/g, item.quoted_text);
+        html = html.replace(/{annotation_text}/g, item.annotation_text);
+
+        const wrapper = document.createElement('div');
+        wrapper.innerHTML = html;
+
+        container.appendChild(wrapper.firstElementChild);
     });
 
     return container;
