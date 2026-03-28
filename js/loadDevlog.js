@@ -11,16 +11,18 @@ async function loadDevlog() {
 
             card.innerHTML = `
                 <div class="devlog-header">
-                    <span class="type ${item.type}">${item.type}</span>
-                    <span class="status">${item.status}</span>
+                    <div class="devlog-title">
+                        <span class="type ${item.type}">${item.type}</span>
+                        <h3 class="devlog-title">${item.description}</h3>
+                    </div>
+                    <span class="date">${item.date}</span>
                 </div>
-
-                <h3 class="devlog-title">${item.description}</h3>
 
                 <p class="devlog-notes">${item.notes}</p>
 
                 <div class="devlog-footer">
-                    <span class="date">${item.date}</span>
+                    <span class="status">${item.status}</span>
+
                 </div>
             `;
 

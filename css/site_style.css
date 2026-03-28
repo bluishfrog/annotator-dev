@@ -14,6 +14,7 @@ body {
 
 body a {
     color: #33337C;
+    font-weight: 500;
     text-decoration: none;
 }
 
@@ -328,7 +329,7 @@ body {
     text-decoration: none;
     margin: 0 0px;
     transition: color 0.2s ease-in-out;
-    font-weight: 450;
+    font-weight: 500;
 }
 
 .site-footer a:hover {
@@ -1307,9 +1308,12 @@ h3 {
 .devlog-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: baseline;
+}
 
-    margin-bottom: 6px;
+.devlog-title {
+    display: inline;
+    align-items: left;
 }
 
 /* ---------- TYPE TAG ---------- */
@@ -1317,8 +1321,11 @@ h3 {
 .type {
     font-size: 12px;
     font-weight: 600;
+    
+    position: relative;
+    top: -2px;
 
-    padding: 3px 8px;
+    padding: 0px 8px 2px 8px;
     border-radius: 6px;
 
     text-transform: lowercase;
@@ -1349,6 +1356,7 @@ h3 {
 .devlog-title {
     font-size: 16px;
     margin-bottom: 6px;
+    margin-left: 2px;
     color: #333;
 }
 
@@ -1371,3 +1379,94 @@ h3 {
     font-size: 12px;
     color: #888;
 }
+
+
+/* ---------- YAPPING LAYOUT ---------- */
+
+.blu-yapping {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 250px;
+}
+
+/* ---------- FROG ---------- */
+
+.frog-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: auto;
+}
+
+.frog-wrapper img {
+    max-width: 140px;
+    height: auto;
+}
+
+/* ---------- SPEECH BUBBLE ---------- */
+
+.blu-yapps-card {
+    position: relative;
+
+    background-color: #ffffff;
+    border: 1px solid #d0d0d0;
+
+    border-radius: 12px;
+
+    padding: 12px 14px;
+
+    max-width: 90%;
+
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+
+    font-size: 14px;
+    color: #333;
+
+    /* position above frog */
+    align-self: flex-end;
+    margin-bottom: 10px;
+}
+
+/* ---------- SPEECH BUBBLE TAIL ---------- */
+
+.blu-yapps-card::after {
+    content: "";
+
+    position: absolute;
+
+    bottom: -10px;
+    right: 30px;
+
+    width: 0;
+    height: 0;
+
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid #ffffff;
+}
+
+/* subtle border for tail */
+.blu-yapps-card::before {
+    content: "";
+
+    position: absolute;
+
+    bottom: -12px;
+    right: 30px;
+
+    width: 0;
+    height: 0;
+
+    border-left: 11px solid transparent;
+    border-right: 11px solid transparent;
+    border-top: 11px solid #d0d0d0;
+}
+
+/* ---------- TEXT ---------- */
+
+.blu-yapps-card p {
+    margin: 0;
+    line-height: 1.4;
+}
+
