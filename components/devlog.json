@@ -34,6 +34,13 @@
       "status": "nice to have",
       "date": "2026-03-27",
       "notes": "only for not-locked fics obviously. would still download the html file locally to downloads folder. but gets rid of some manual steps."
+    },
+    {
+      "type": "feature",
+      "description": "possibility to edit not just html file",
+      "status": "would be cool might defeat me though",
+      "date": "2026-03-28",
+      "notes": "maybe a function to process something into a html? then I don't have to rework this into considering many other file types... I don't want to cry."
     }
   ]
 }
