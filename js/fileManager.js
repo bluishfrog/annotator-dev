@@ -2,28 +2,29 @@ let currentHTMLFileHandle = null;
 
 async function assignHTMLFile() {
     try {
-        const input = document.createElement("input");
-        input.type = "file";
-        input.accept = ".html,.htm";
-        input.multiple = false;
+        const [fileHandle] = await window.showOpenFilePicker({
+            multiple: false,
+            types: [
+                {
+                    description: 'HTML Files',
+                    accept: {
+                        'text/html': ['.html', '.htm']
+                    }
+                }
+            ]
+        });
 
-        input.click();
+        currentHTMLFileHandle = fileHandle;
 
-        input.onchange = async () => {
-            const file = input.files[0];
-            if (!file) return;
+        const file = await fileHandle.getFile();
+        const text = await file.text();
 
-            currentHTMLFileHandle = file;
+        document.getElementById("HTMLFile").textContent = file.name;
 
-            const text = await file.text();
+        loadHTMLIntoPreview(text);
 
-            document.getElementById("HTMLFile").textContent = file.name;
-
-            loadHTMLIntoPreview(text);
-
-            document.dispatchEvent(new Event("source-file-uploaded"));
-        };
-
+        document.dispatchEvent(new Event("source-file-uploaded"));
+        
     } catch (err) {
         console.log("File selection cancelled or failed:", err);
     }
