@@ -45,13 +45,14 @@ function loadHTMLIntoPreview(htmlContent) {
 
 function loadAnnotPreview(htmlContent) {
 
-    originalHTMLContent = htmlContent;
+    const annotHTML = constructAnnotHTML(htmlContent)
 
-    formattedAnnots = buildAnnotationPreview(originalHTMLContent);
-
-    window.formattedAnnots = formattedAnnots;
-
+    const response = fetch('components/testannotfile.html');
+    const html = response.text();
     const previewRoot = document.getElementById('annot-preview-frame');
 
-    previewRoot.innerHTML = formattedAnnots;
+    annotRawHTML = html;
+    annotRawHTML = annotRawHTML.replace(/<script[\s\S]*?>[\s\S]*?<\/script>/gi, '');
+
+    previewRoot.innerHTML = html
 }
