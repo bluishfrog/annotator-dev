@@ -5,18 +5,23 @@ async function loadDevlog() {
 
         const container = document.getElementById('devlog-container');
 
-        data.forEach(item => {
+        data.items.forEach(item => {
             const card = document.createElement('div');
-            card.classList.add('devlog-card');
+            card.classList.add('devlog-card', item.type);
 
             card.innerHTML = `
                 <div class="devlog-header">
                     <span class="type ${item.type}">${item.type}</span>
                     <span class="status">${item.status}</span>
                 </div>
-                <h3>${item.description}</h3>
-                <p class="notes">${item.notes}</p>
-                <span class="date">${item.date}</span>
+
+                <h3 class="devlog-title">${item.description}</h3>
+
+                <p class="devlog-notes">${item.notes}</p>
+
+                <div class="devlog-footer">
+                    <span class="date">${item.date}</span>
+                </div>
             `;
 
             container.appendChild(card);
