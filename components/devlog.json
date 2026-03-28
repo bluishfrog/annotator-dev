@@ -43,7 +43,7 @@
       "notes": "maybe a function to process something into a html? then I don't have to rework this into considering many other file types... I don't want to cry."
     },
     {
-      "type": "bug",
+      "type": "fix",
       "description": "get toast types working",
       "status": "pls",
       "date": "2026-03-28",
@@ -57,11 +57,25 @@
       "notes": "not too complicated but if I have to stare at ao3 html any longer right now, I might cry."
     },
     {
-      "type": "bug",
+      "type": "fix",
       "description": "mobile selection needs double tab",
       "status": "ugh",
       "date": "2026-03-28",
       "notes": "currently needs double tab so selection can only ever be one word... that is not the functionality we desire, is it."
+    },
+    {
+      "type": "feature",
+      "description": "emoji keyboard",
+      "status": "could be practical",
+      "date": "2026-03-28",
+      "notes": "only on desktop, on annotation popup. users can also just open the one on their device though so it's not an immediate need."
+    },
+    {
+      "type": "feature",
+      "description": "keyboard shortkeys",
+      "status": "if you wanna be fast af",
+      "date": "2026-03-28",
+      "notes": "only on desktop, set short cuts for example for 'save annot' in the config panel."
     }
   ]
 }

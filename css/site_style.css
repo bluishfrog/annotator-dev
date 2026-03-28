@@ -44,7 +44,7 @@ body {
 .main-content h1,
 .main-content h2 {
     margin-top: 0;
-    color: #333;
+    color: var(--color-text);
 }
 
 
@@ -502,7 +502,7 @@ body {
     font-family: inherit;
     font-size: 14px;
     background-color: var(--color-surface);
-    color: #333;
+    color: var(--color-text);
 }
 
 .tab-dropdown select:focus {
@@ -1195,6 +1195,12 @@ h3 {
     white-space: pre-wrap;
     background-color: var(--color-code-bg);
     color: var(--color-code-text);
+}
+
+/* ---------- Annotation config ---------- */
+
+.annotation-template {
+    background-color: var(--color-bg);
 }
 
 /* ---------- DEVLOG CONTAINER ---------- */
