@@ -43,7 +43,7 @@ function loadHTMLIntoPreview(htmlContent) {
     initAnnotationSystem();
 }
 
-async function loadAnnotPreview(htmlContent) {
+function loadAnnotPreview(htmlContent) {
 
     //this is for later, ignore for now
     const annotHTML = constructAnnotHTML(htmlContent)
