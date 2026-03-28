@@ -19,7 +19,7 @@ function initAnnotationSystem() {
     document.getElementById("annotation-save").onclick = saveAnnotation;
     document.getElementById("annotation-delete").onclick = deleteAnnotation;
 
-    updatePreview();
+    document.dispatchEvent(new Event("source-file-preview-updated"));
 }
 
 /* ---------------- Save File ---------------- */
@@ -34,7 +34,7 @@ async function saveFile() {
     await writable.write(html);
     await writable.close();
 
-    document.dispatchEvent(new Event("source-file-changed"));
+    document.dispatchEvent(new Event("source-file-preview-updated"));
 }
 
 
@@ -96,7 +96,7 @@ function handleAnnotationClick(e) {
     showPopoverAtPosition(rect.left, rect.top);
 
     document.getElementById("annotation-input").value =
-        el.getAttribute("data-annotation-text") || "";
+        el.getAttribute("dataAnnotationText") || "";
 }
 
 /* ---------------- POPUP ---------------- */
@@ -135,7 +135,7 @@ function saveAnnotation() {
 
     // CASE 1: EDIT EXISTING
     if (activeAnnotationEl) {
-        activeAnnotationEl.setAttribute("data-annotation-text", text);
+        activeAnnotationEl.setAttribute("dataAnnotationText", text);
         closePopover();
         return;
     }
@@ -145,8 +145,8 @@ function saveAnnotation() {
 
     const span = document.createElement("span");
     span.className = "annotation";
-    span.setAttribute("data-annotation-id", generateId());
-    span.setAttribute("data-annotation-text", text);
+    span.setAttribute("dataAnnotationId", generateId());
+    span.setAttribute("dataAnnotationText", text);
 
     try {
         selectedRange.surroundContents(span);
@@ -157,7 +157,6 @@ function saveAnnotation() {
 
     saveFile()
     closePopover();
-    updatePreview();
 }
 
 /* ---------------- DELETE ---------------- */
@@ -179,7 +178,6 @@ function deleteAnnotation() {
 
     saveFile()
     closePopover();
-    updatePreview();
 }
 
 /* ---------------- UTIL ---------------- */

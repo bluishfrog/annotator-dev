@@ -23,8 +23,6 @@ async function assignHTMLFile() {
 
         loadHTMLIntoPreview(text);
 
-        document.dispatchEvent(new Event("source-file-uploaded"));
-        
     } catch (err) {
         console.log("File selection cancelled or failed:", err);
     }

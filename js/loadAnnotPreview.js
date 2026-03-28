@@ -1,47 +1,74 @@
 /* ---------------- ANNOTATION CONSTRUCTION ---------------- */
 
-function extractAnnotations(doc) {
+async function extractAnnotations(doc) {
     const annotations = [];
 
     doc.querySelectorAll(".annotation").forEach(span => {
-        const text = span.textContent;
-        const annotationText = span.dataset.annotationText;
-        const chapterEl = doc.querySelector("#chapters .heading");
+        const annotID = span.getAttribute("dataannotationid");
+        const text = span.textContent.trim();
+        const annotationText = span.getAttribute("dataannotationtext");
 
         annotations.push({
+            annot_id: annotID,
             quoted_text: text,
-            annotation_text: annotationText,
-            chapter: chapterEl ? chapterEl.textContent.trim() : "Unknown"
+            annotation_text: annotationText
         });
     });
 
     return annotations;
 }
 
+async function formatAnnots(annotations) {
+    
+    const container = document.createElement('div');
 
+    annotations.forEach(item => {
+        const annot = document.createElement('p');
 
+        annot.innerHTML = `<q>${item.quoted_text}</q><br>--- ${item.annotation_text}`;
 
+        container.appendChild(annot);
+    });
+
+    return container;
+}
 
 
 /* ---------------- ANNOT PREVIEW ---------------- */
 
-async function loadAnnotPreviewTest() {
-
+async function loadAnnotPreview() {
     try {
-        const response = await fetch('components/testannotfile.html');
-        const html = await response.text();
+        if (!currentHTMLFileHandle) return;
+
+        const file = await currentHTMLFileHandle.getFile();
+        const text = await file.text();
+
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(text, "text/html");
+
+        const annotations = await extractAnnotations(doc);
+
         const previewRoot = document.getElementById('annot-preview-frame');
 
-        annotRawHTML = html;
-        annotRawHTML = annotRawHTML.replace(/<script[\s\S]*?>[\s\S]*?<\/script>/gi, '');
+        if (!annotations || annotations.length === 0) {
+            previewRoot.innerHTML = "<p>Add a first annotation to get a preview here.</p>";
+            return;
+        }
 
-        previewRoot.innerHTML = html
+        const htmlcontainer = await formatAnnots(annotations);
+
+        annotRawHTML = htmlcontainer.innerHTML;
+
+        previewRoot.innerHTML = "";
+
+        previewRoot.appendChild(htmlcontainer);
 
     } catch (err) {
         console.error('Failed to load test annot file:', err);
     }
-
 }
 
-document.addEventListener('source-file-uploaded', loadAnnotPreviewTest);
-document.addEventListener('source-file-changed', loadAnnotPreviewTest);
+document.addEventListener('source-file-preview-updated', () => {
+    console.log("EVENT FIRED");
+    loadAnnotPreview();
+});
