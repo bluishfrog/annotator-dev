@@ -45,11 +45,18 @@ function loadHTMLIntoPreview(htmlContent) {
 
 function loadAnnotPreview(htmlContent) {
 
-    //this is for later, ignore for now
-    const annotHTML = constructAnnotHTML(htmlContent)
+    console.log("annot preview triggered");
 
     const previewRoot = document.getElementById('annot-preview-frame');
 
-    previewRoot.innerHTML = "<h1 style='color:red'>ANNOT TEST WORKS</h1>";
+    console.log("frame:", previewRoot);
 
+    if (!previewRoot) {
+        alert("ANNOT FRAME NOT FOUND");
+        return;
+    }
+
+    previewRoot.style.border = "3px solid red";
+
+    previewRoot.innerHTML = "<h1>ANNOT TEST WORKS</h1>";
 }
