@@ -31,3 +31,24 @@ async function copyToClipboard() {
         showToast("Failed copying :(");
     }
 }
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const toggle = document.getElementById('annot-preview-mode-toggle');
+    const preview = document.getElementById('annot-preview-frame');
+
+    toggle.addEventListener('change', () => {
+
+        if (toggle.checked) {
+            preview.classList.add('code-mode');
+            preview.textContent = annotRawHTML;
+            
+        } else {
+            preview.classList.remove('code-mode');
+            preview.innerHTML = annotRawHTML;
+        }
+
+    });
+});
+
+

@@ -5,6 +5,9 @@ async function loadAnnotPreviewTest() {
         const html = await response.text();
         const previewRoot = document.getElementById('annot-preview-frame');
 
+        annotRawHTML = html;
+        annotRawHTML = annotRawHTML.replace(/<script[\s\S]*?>[\s\S]*?<\/script>/gi, '');
+
         previewRoot.innerHTML = html
 
     } catch (err) {

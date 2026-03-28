@@ -1240,6 +1240,7 @@ h3 {
     box-shadow: none;
 }
 
+
 .file-actions button,
 .annot-preview-button button {
     width: 145px;      
@@ -1273,8 +1274,6 @@ h3 {
     background-color: #f4f4f4;
     color: #222;
 }
-
-
 
 /* ---------- DEVLOG CONTAINER ---------- */
 
