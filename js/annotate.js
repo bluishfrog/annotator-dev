@@ -19,6 +19,8 @@ function initAnnotationSystem() {
     document.getElementById("annotation-save").onclick = saveAnnotation;
     document.getElementById("annotation-delete").onclick = deleteAnnotation;
 
+    document.addEventListener("mousedown", handleOutsideClick);
+
     document.dispatchEvent(new Event("source-file-preview-updated"));
 }
 
@@ -184,4 +186,20 @@ function deleteAnnotation() {
 
 function generateId() {
     return `ann-${Date.now()}-${annotationCounter++}`;
+}
+
+
+/* ---------------- handle outside click ---------------- */
+function handleOutsideClick(e) {
+    const popover = document.getElementById("annotation-popover");
+
+    // if popover is hidden, do nothing
+    if (popover.classList.contains("hidden")) return;
+
+    const isClickInsidePopover = popover.contains(e.target);
+    const isClickOnAnnotation = e.target.closest(".annotation");
+
+    if (!isClickInsidePopover && !isClickOnAnnotation) {
+        closePopover();
+    }
 }
