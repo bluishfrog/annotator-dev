@@ -21,26 +21,13 @@ async function assignHTMLFile() {
 
         document.getElementById("HTMLFile").textContent = file.name;
 
-        loadHTMLIntoPreview(text);
         loadAnnotPreview(text);
+        loadHTMLIntoPreview(text);
+        
 
     } catch (err) {
         console.log("File selection cancelled or failed:", err);
     }
-}
-
-function loadHTMLIntoPreview(htmlContent) {
-
-    originalHTMLContent = htmlContent;
-
-    window.originalHTMLContent = originalHTMLContent;
-    window.currentHTMLFileHandle = currentHTMLFileHandle;
-
-    const previewRoot = document.getElementById('preview-frame');
-
-    previewRoot.innerHTML = `<div id="htmlpreview">${htmlContent}</div>`;
-
-    initAnnotationSystem();
 }
 
 function loadAnnotPreview(htmlContent) {
@@ -60,3 +47,18 @@ function loadAnnotPreview(htmlContent) {
 
     previewRoot.innerHTML = "<h1>ANNOT TEST WORKS</h1>";
 }
+
+function loadHTMLIntoPreview(htmlContent) {
+
+    originalHTMLContent = htmlContent;
+
+    window.originalHTMLContent = originalHTMLContent;
+    window.currentHTMLFileHandle = currentHTMLFileHandle;
+
+    const previewRoot = document.getElementById('preview-frame');
+
+    previewRoot.innerHTML = `<div id="htmlpreview">${htmlContent}</div>`;
+
+    initAnnotationSystem();
+}
+
