@@ -45,16 +45,11 @@ function loadHTMLIntoPreview(htmlContent) {
 
 async function loadAnnotPreview(htmlContent) {
 
-    //this is for later
+    //this is for later, ignore for now
     const annotHTML = constructAnnotHTML(htmlContent)
 
-    const response = await fetch('components/testannotfile.html');
-    const html = await response.text();
     const previewRoot = document.getElementById('annot-preview-frame');
 
-    annotRawHTML = html;
-    annotRawHTML = annotRawHTML.replace(/<script[\s\S]*?>[\s\S]*?<\/script>/gi, '');
-
-    previewRoot.innerHTML = html
+    previewRoot.innerHTML = "<h1 style='color:red'>ANNOT TEST WORKS</h1>";
 
 }
