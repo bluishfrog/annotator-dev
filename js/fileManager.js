@@ -13,7 +13,6 @@ async function assignHTMLFile() {
             const file = input.files[0];
             if (!file) return;
 
-            // Keep name consistency: fake a "handle-like" object
             currentHTMLFileHandle = file;
 
             const text = await file.text();
