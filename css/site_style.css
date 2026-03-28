@@ -700,6 +700,8 @@ body {
 }
 
 .file-actions button {
+    min-width: 80;
+    max-width: 80;
     background-color: #C9F2FF ;
     border: none;
     border-radius: 8px;
@@ -1215,6 +1217,8 @@ h3 {
 }
 
 .annot-preview-button button {
+    min-width: 80;
+    max-width: 80;
     background-color: #C9F2FF ;
     border: none;
     border-radius: 8px;
