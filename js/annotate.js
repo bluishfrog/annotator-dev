@@ -28,7 +28,35 @@ function initAnnotationSystem() {
 
     // MOBILE FIX (non-breaking)
     if (window.matchMedia("(pointer: coarse)").matches) {
-        preview.addEventListener("touchend", handleMobileSelection);
+
+        preview.addEventListener("touchend", () => {
+
+            // wait for browser to finalize selection AFTER touch
+            setTimeout(() => {
+
+                const selection = window.getSelection();
+                if (!selection || selection.isCollapsed) return;
+
+                const range = selection.getRangeAt(0);
+
+                const preview = document.getElementById("htmlpreview");
+                if (!preview.contains(range.commonAncestorContainer)) return;
+
+                const text = selection.toString().trim();
+
+                // ignore accidental taps
+                if (text.length < 2) return;
+
+                // reuse YOUR EXISTING desktop logic
+                selectedRange = range;
+                activeAnnotationEl = null;
+
+                document.getElementById("annotation-input").value = "";
+
+                showPopoverAtRange(range);
+
+            }, 250); // KEY: must be AFTER selection finalizes
+        });
     }
 }
 
@@ -98,49 +126,6 @@ function handleSelectionChange() {
     }, 300); // delay helps mobile drag finish
 }
 
-
-/* ---------------- SELECTION -> NEW ANNOTATION ---------------- */
-
-function handleTextSelection() {
-    const selection = window.getSelection();
-    if (!selection || selection.isCollapsed) return;
-
-    const range = selection.getRangeAt(0);
-
-    if (!currentHTMLFileHandle) {
-        showToast("You need to load your own HTML first before you can start annotating :)");
-        return;
-    }
-
-    // ensure selection is inside preview
-    const preview = document.getElementById("htmlpreview");
-    if (!preview.contains(range.commonAncestorContainer)) return;
-
-    // detect if selection touches an existing annotation
-    const startContainer = range.startContainer;
-    const endContainer = range.endContainer;
-
-    const startAnnotation = startContainer.nodeType === 3
-        ? startContainer.parentElement?.closest(".annotation")
-        : startContainer.closest?.(".annotation");
-
-    const endAnnotation = endContainer.nodeType === 3
-        ? endContainer.parentElement?.closest(".annotation")
-        : endContainer.closest?.(".annotation");
-
-    if (startAnnotation || endAnnotation) {
-        showToast("You cannot create an annotation inside an existing annotation. Please select text outside the highlighted areas.");
-        selection.removeAllRanges();
-        return;
-    }
-
-    selectedRange = range;
-
-    showPopoverAtRange(range);
-
-    document.getElementById("annotation-input").value = "";
-    activeAnnotationEl = null;
-}
 
 /* ---------------- Mobile Selection ---------------- */
 
