@@ -1,6 +1,9 @@
 let selectedRange = null;
 let activeAnnotationEl = null;
 let annotationCounter = 0;
+let selectionTimeout = null;
+
+const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
 
 /* ---------------- INIT ---------------- */
 
@@ -11,7 +14,7 @@ function initAnnotationSystem() {
     if (!preview) return;
 
     // click inside preview to create or edit annotation
-    preview.addEventListener("mouseup", handleTextSelection);
+    preview.addEventListener("mouseup", handleSelectionChange);
     preview.addEventListener("click", handleAnnotationClick);
 
     // popup buttons
@@ -22,6 +25,8 @@ function initAnnotationSystem() {
     document.addEventListener("mousedown", handleOutsideClick);
 
     document.dispatchEvent(new Event("source-file-preview-updated"));
+
+
 }
 
 /* ---------------- Save File ---------------- */
@@ -37,6 +42,57 @@ async function saveFile() {
     await writable.close();
 
     document.dispatchEvent(new Event("source-file-preview-updated"));
+}
+
+
+/* ---------------- SELECTION (new version that should work better on mobile?) ---------------- */
+
+function handleSelectionChange() {
+
+    clearTimeout(selectionTimeout);
+
+    selectionTimeout = setTimeout(() => {
+
+        const selection = window.getSelection();
+
+        if (!selection || selection.isCollapsed) return;
+
+        const range = selection.getRangeAt(0);
+
+        if (!currentHTMLFileHandle) {
+            showToast("You need to load your own HTML first before you can start annotating :)");
+            return;
+        }
+
+        const preview = document.getElementById("htmlpreview");
+        if (!preview.contains(range.commonAncestorContainer)) return;
+
+        // prevent selection inside annotations
+        const startContainer = range.startContainer;
+        const endContainer = range.endContainer;
+
+        const startAnnotation = startContainer.nodeType === 3
+            ? startContainer.parentElement?.closest(".annotation")
+            : startContainer.closest?.(".annotation");
+
+        const endAnnotation = endContainer.nodeType === 3
+            ? endContainer.parentElement?.closest(".annotation")
+            : endContainer.closest?.(".annotation");
+
+        if (startAnnotation || endAnnotation) {
+            showToast("You cannot create an annotation inside an existing annotation. Please select text outside the highlighted areas.");
+            selection.removeAllRanges();
+            return;
+        }
+
+        selectedRange = range;
+
+        showPopoverAtRange(range);
+
+        document.getElementById("annotation-input").value = "";
+        activeAnnotationEl = null;
+
+    }, 300); // delay helps mobile drag finish
 }
 
 
@@ -82,6 +138,7 @@ function handleTextSelection() {
     document.getElementById("annotation-input").value = "";
     activeAnnotationEl = null;
 }
+
 
 /* ---------------- CLICK EXISTING ANNOTATION ---------------- */
 
