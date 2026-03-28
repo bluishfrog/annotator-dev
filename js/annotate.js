@@ -26,9 +26,9 @@ function initAnnotationSystem() {
 
     document.dispatchEvent(new Event("source-file-preview-updated"));
 
-    // MOBILE FIX (non-breaking)
+    // MOBILE FIX
     if (window.matchMedia("(pointer: coarse)").matches) {
-        document.addEventListener("selectionchange", handleMobileSelectionStable);
+        document.addEventListener("selectionchange", handleMobileFinalSelection);
     }
 }
 
@@ -48,7 +48,7 @@ async function saveFile() {
 }
 
 
-/* ---------------- SELECTION (new version that should work better on mobile?) ---------------- */
+/* ---------------- SELECTION ---------------- */
 
 function handleSelectionChange() {
 
@@ -101,25 +101,26 @@ function handleSelectionChange() {
 
 /* ---------------- Mobile Selection ---------------- */
 
-function handleMobileSelectionStable() {
+function handleMobileFinalSelection() {
 
     clearTimeout(selectionTimeout);
 
+    // KEY: wait until user stops interacting with selection handles
     selectionTimeout = setTimeout(() => {
 
         const selection = window.getSelection();
 
         if (!selection || selection.isCollapsed) return;
 
+        const text = selection.toString().trim();
+
+        // ignore accidental taps / word-only
+        if (text.length < 2) return;
+
         const range = selection.getRangeAt(0);
 
         const preview = document.getElementById("htmlpreview");
         if (!preview.contains(range.commonAncestorContainer)) return;
-
-        const text = selection.toString().trim();
-
-        // ignore single-word / accidental taps
-        if (text.length < 2) return;
 
         // prevent annotation inside annotation
         const startContainer = range.startContainer;
@@ -142,7 +143,7 @@ function handleMobileSelectionStable() {
 
         showPopoverAtRange(range);
 
-    }, 120); // key: short debounce, runs AFTER selection stabilizes
+    }, 400); // IMPORTANT: Android needs longer delay than iOS
 }
 
 /* ---------------- CLICK EXISTING ANNOTATION ---------------- */

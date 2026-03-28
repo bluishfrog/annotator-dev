@@ -1,7 +1,7 @@
 {
   "items": [
     {
-      "type": "bug",
+      "type": "fixed",
       "description": "Can't upload files on mobile",
       "status": "breaks functionality",
       "date": "2026-03-27",
@@ -55,6 +55,13 @@
       "status": "would be very cool",
       "date": "2026-03-28",
       "notes": "not too complicated but if I have to stare at ao3 html any longer right now, I might cry."
+    },
+    {
+      "type": "bug",
+      "description": "mobile selection needs double tab",
+      "status": "ugh",
+      "date": "2026-03-28",
+      "notes": "currently needs double tab so selection can only ever be one word... that is not the functionality we desire, is it."
     }
   ]
 }
