@@ -78,3 +78,13 @@ async function loadAnnotPreview() {
 document.addEventListener('source-file-preview-updated', () => {
     loadAnnotPreview();
 });
+
+document.addEventListener('annot-format-area-changed', () => {
+    loadAnnotPreview();
+});
+
+const textarea = document.getElementById('annotation-template');
+
+textarea.addEventListener('input', () => {
+    document.dispatchEvent(new Event("annot-format-area-changed"));
+});

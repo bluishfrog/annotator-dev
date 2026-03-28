@@ -1,8 +1,8 @@
 {
   "items": [
     {
-      "type": "fixed",
-      "description": "Can't upload files on mobile",
+      "type": "fix",
+      "description": "can't upload files on mobile",
       "status": "breaks functionality",
       "date": "2026-03-27",
       "notes": "probabily the file picker that doens't work on mobile... ugh"

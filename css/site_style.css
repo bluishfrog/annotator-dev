@@ -1264,8 +1264,8 @@ h3 {
     color: var(--color-primary);
 }
 
-/* fixed style */
-.devlog-card.fixed .type {
+/* fix style */
+.devlog-card.fix .type {
     background-color: var(--color-success);
     color: var(--color-success-text);
 }

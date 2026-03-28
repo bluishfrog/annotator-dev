@@ -5,6 +5,14 @@ async function loadDevlog() {
 
         const container = document.getElementById('devlog-container');
 
+        const order = {
+            bug: 0,
+            feature: 1,
+            fix: 2
+        };
+
+        data.items.sort((a, b) => order[a.type] - order[b.type]);
+
         data.items.forEach(item => {
             const card = document.createElement('div');
             card.classList.add('devlog-card', item.type);
