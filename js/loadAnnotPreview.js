@@ -21,7 +21,7 @@ async function extractAnnotations(doc) {
 async function formatAnnots(annotations) {
 
     const template = document.getElementById('annotation-template').value;
-    
+
     const container = document.createElement('div');
 
     annotations.forEach(item => {
@@ -76,6 +76,5 @@ async function loadAnnotPreview() {
 }
 
 document.addEventListener('source-file-preview-updated', () => {
-    console.log("EVENT FIRED");
     loadAnnotPreview();
 });

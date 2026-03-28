@@ -136,11 +136,11 @@ async function copyToClipboard() {
             document.body.removeChild(textarea);
         }
 
-        showToast("Copied to clipboard :)");
+        showToast("Copied to clipboard :)", "success");
 
     } catch (err) {
         console.error(err);
-        showToast("Failed copying :(");
+        showToast("Failed copying :(", "error");
     }
 }
 

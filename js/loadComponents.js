@@ -18,5 +18,3 @@ function loadComponent(id, file) {
 loadComponent("nav-placeholder", "components/nav.html");
 loadComponent("footer-placeholder", "components/footer.html");
 loadComponent("head-placeholder", "components/head.html");
-loadComponent("preview-ao3-style-placeholder", "components/ao3_preview_style.html");
-loadComponent("default-annot-format-placeholder", "components/defaultannotformat.html");
