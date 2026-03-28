@@ -1272,3 +1272,28 @@ h3 {
     background-color: #f4f4f4;
     color: #222;
 }
+
+
+/* ---------- YAPPING PAGE ---------- */
+
+/* ---------- Devlog cards ---------- */
+
+.devlog-card {
+    border: 1px solid #ddd;
+    padding: 12px;
+    margin-bottom: 12px;
+    border-radius: 10px;
+}
+
+.type.bug {
+    color: red;
+}
+
+.type.feature {
+    color: blue;
+}
+
+.status {
+    font-size: 0.8em;
+    opacity: 0.7;
+}

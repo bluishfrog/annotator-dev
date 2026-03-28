@@ -1,0 +1,39 @@
+{
+  "items": [
+    {
+      "type": "bug",
+      "description": "Can't upload files on mobile",
+      "status": "breaks functionality",
+      "date": "2026-03-27",
+      "notes": "probabily the file picker that doens't work on mobile... ugh"
+    },
+    {
+      "type": "feature",
+      "description": "fic preview: change font style based on own preferences",
+      "status": "nice to have",
+      "date": "2026-03-27",
+      "notes": "would be nice to have an instant option to format like ao3. And upload field to add personal css. Cause you know... everyone has a personal css?"
+    },
+    {
+      "type": "bug",
+      "description": "stupid left margin when collapsed builder panel",
+      "status": "annoying me",
+      "date": "2026-03-27",
+      "notes": "does it break the functionality? no. does it annoy the fuck out of me? yes. At least I already know it's a problem with the collapsing animation."
+    },
+    {
+      "type": "bug",
+      "description": "mobile collapsing builder panel",
+      "status": "annoying me",
+      "date": "2026-03-27",
+      "notes": "same issue as the margin. panel animation create transparent ghost-panel instead of hiding it. It would be nice to at least have the panel collapse upwards on mobile."
+    },
+    {
+      "type": "feature",
+      "description": "possibility to connect ao3 fics directly by link",
+      "status": "nice to have",
+      "date": "2026-03-27",
+      "notes": "only for not-locked fics obviously. would still download the html file locally to downloads folder. but gets rid of some manual steps."
+    }
+  ]
+}
