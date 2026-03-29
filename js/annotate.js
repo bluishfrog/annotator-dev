@@ -35,16 +35,24 @@ function initAnnotationSystem() {
 /* ---------------- Save File ---------------- */
 
 async function saveFile() {
-    if (!currentHTMLFileHandle) return;
 
-    const writable = await currentHTMLFileHandle.createWritable();
+    try {
 
-    const html = document.getElementById("htmlpreview").innerHTML;
+        if (!currentHTMLFileHandle) return;
 
-    await writable.write(html);
-    await writable.close();
+        const writable = await currentHTMLFileHandle.createWritable();
 
-    document.dispatchEvent(new Event("source-file-preview-updated"));
+        const html = document.getElementById("htmlpreview").innerHTML;
+
+        await writable.write(html);
+        await writable.close();
+
+        document.dispatchEvent(new Event("source-file-preview-updated"));
+
+    } catch (error) {
+        showToast("Failed to save your annotation. I do not know why :(", "error")
+    }
+
 }
 
 
@@ -88,6 +96,40 @@ function handleSelectionChange() {
             return;
         }
 
+        // prevent selection that fully wraps existing annotations
+        const fragment = range.cloneContents();
+        const hasInnerAnnotation = fragment.querySelector(".annotation");
+
+        if (hasInnerAnnotation) {
+            showToast(
+                "You cannot create an annotation that surrounds an existing annotation.",
+                "warning"
+            );
+            selection.removeAllRanges();
+            return;
+        }
+
+        // warn away from selection that attemps to go over more than one paragraph
+        const startEl = range.startContainer.nodeType === 3
+            ? range.startContainer.parentElement
+            : range.startContainer;
+
+        const endEl = range.endContainer.nodeType === 3
+            ? range.endContainer.parentElement
+            : range.endContainer;
+
+        const startParagraph = startEl.closest("p");
+        const endParagraph = endEl.closest("p");
+
+        if (startParagraph && endParagraph && startParagraph !== endParagraph) {
+            showToast(
+                "Annotations cannot span multiple paragraphs. Please select text within a single paragraph.",
+                "warning"
+            );
+            selection.removeAllRanges();
+            return;
+        }
+
         selectedRange = range;
 
         showPopoverAtRange(range);
@@ -105,7 +147,6 @@ function handleMobileFinalSelection() {
 
     clearTimeout(selectionTimeout);
 
-    // KEY: wait until user stops interacting with selection handles
     selectionTimeout = setTimeout(() => {
 
         const selection = window.getSelection();
@@ -118,6 +159,11 @@ function handleMobileFinalSelection() {
         if (text.length < 2) return;
 
         const range = selection.getRangeAt(0);
+
+        if (!currentHTMLFileHandle) {
+            showToast("You need to load your own HTML first before you can start annotating :)", "warning");
+            return;
+        }
 
         const preview = document.getElementById("htmlpreview");
         if (!preview.contains(range.commonAncestorContainer)) return;
@@ -134,7 +180,45 @@ function handleMobileFinalSelection() {
             ? endContainer.parentElement?.closest(".annotation")
             : endContainer.closest?.(".annotation");
 
-        if (startAnnotation || endAnnotation) return;
+        if (startAnnotation || endAnnotation) {
+            showToast("You cannot create an annotation inside an existing annotation. Please select text outside the highlighted areas.", "warning");
+            selection.removeAllRanges();
+            return;
+        }
+
+        // prevent selection that fully wraps existing annotations
+        const fragment = range.cloneContents();
+        const hasInnerAnnotation = fragment.querySelector(".annotation");
+
+        if (hasInnerAnnotation) {
+            showToast(
+                "You cannot create an annotation that surrounds an existing annotation.",
+                "warning"
+            );
+            selection.removeAllRanges();
+            return;
+        }
+
+        // warn away from selection that attemps to go over more than one paragraph
+        const startEl = range.startContainer.nodeType === 3
+            ? range.startContainer.parentElement
+            : range.startContainer;
+
+        const endEl = range.endContainer.nodeType === 3
+            ? range.endContainer.parentElement
+            : range.endContainer;
+
+        const startParagraph = startEl.closest("p");
+        const endParagraph = endEl.closest("p");
+
+        if (startParagraph && endParagraph && startParagraph !== endParagraph) {
+            showToast(
+                "Annotations cannot span multiple paragraphs. Please select text within a single paragraph.",
+                "warning"
+            );
+            selection.removeAllRanges();
+            return;
+        }
 
         selectedRange = range;
         activeAnnotationEl = null;
@@ -143,7 +227,7 @@ function handleMobileFinalSelection() {
 
         showPopoverAtRange(range);
 
-    }, 400); // IMPORTANT: Android needs longer delay than iOS
+    }, 400);
 }
 
 /* ---------------- CLICK EXISTING ANNOTATION ---------------- */

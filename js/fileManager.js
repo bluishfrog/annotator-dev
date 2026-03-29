@@ -1,6 +1,16 @@
 let currentHTMLFileHandle = null;
 
+function isChromium() {
+    return !!window.chrome;
+}
+
 async function assignHTMLFile() {
+
+    if (!isChromium()) {
+        showToast("Error: Please use a Chromium-based browser (DuckDuckGo, Chrome, Edge, Brave, etc.). Else you can't save the annotations in your main source file.", "error");
+        return;
+    }
+
     try {
         const [fileHandle] = await window.showOpenFilePicker({
             multiple: false,
@@ -42,3 +52,12 @@ function loadHTMLIntoPreview(htmlContent) {
     initAnnotationSystem();
 }
 
+function loadPlaceholderPreview() {
+    fetch('components/nofileselected.html')
+        .then(res => res.text())
+        .then(html => {
+            loadHTMLIntoPreview(html);
+        });
+}
+
+loadPlaceholderPreview();

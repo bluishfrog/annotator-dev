@@ -42,20 +42,13 @@
     --color-code-text: #222222;
 
     /* ---------- Shadows ---------- */
-    --shadow-sm: #0000000D;
-    /* 5% */
-    --shadow-md: #00000014;
-    /* 8% */
-    --shadow-lg: #0000001A;
-    /* 10% */
-    --shadow-xl: #0000001F;
-    /* 12% */
-    --shadow-2xl: #00000026;
-    /* 15% */
-    --shadow-3xl: #0000002E;
-    /* 18% */
-    --shadow-4xl: #00000040;
-    /* 25% */
+    --shadow-sm: #0000000D;    /* 5% */
+    --shadow-md: #00000014;    /* 8% */
+    --shadow-lg: #0000001A;    /* 10% */
+    --shadow-xl: #0000001F;    /* 12% */
+    --shadow-2xl: #00000026;   /* 15% */
+    --shadow-3xl: #0000002E;   /* 18% */
+    --shadow-4xl: #00000040;   /* 25% */
 }
 
 /* DARK THEME */
@@ -93,7 +86,8 @@
     /* ---------- States ---------- */
     --color-success: #2F7A4B;
     --color-success-text: #B6E9C5;
-    --color-warning: #aa3333;;
+    --color-warning: #aa3333;
+    ;
     --color-warning-text: #FFB3B3;
     --color-error: #FFD6D6;
 

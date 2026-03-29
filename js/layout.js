@@ -61,7 +61,7 @@ function initNavDropdowns() {
             const menu = btn.nextElementSibling;
             if (!menu) return;
 
-            // Desktop → allow normal navigation
+            // Desktop 
             if (!isMobile) return;
 
             // Mobile behavior
@@ -116,10 +116,9 @@ async function copyToClipboard() {
         const htmlContent = preview.innerHTML.trim();
 
         if (navigator.clipboard && window.isSecureContext) {
-            // modern way
             await navigator.clipboard.writeText(htmlContent);
         } else {
-            // fallback (works almost everywhere)
+            // fallback
             const textarea = document.createElement('textarea');
             textarea.value = htmlContent;
 

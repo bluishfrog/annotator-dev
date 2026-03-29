@@ -36,18 +36,11 @@
       "notes": "only for not-locked fics obviously. would still download the html file locally to downloads folder. but gets rid of some manual steps."
     },
     {
-      "type": "feature",
-      "description": "possibility to edit not just html file",
-      "status": "would be cool might defeat me though",
-      "date": "2026-03-28",
-      "notes": "maybe a function to process something into a html? then I don't have to rework this into considering many other file types... I don't want to cry."
-    },
-    {
       "type": "fix",
       "description": "get toast types working",
       "status": "pls",
       "date": "2026-03-28",
-      "notes": "I might be initializing something the wrong way."
+      "notes": "I might be initializing something the wrong way?"
     },
     {
       "type": "feature",
@@ -76,6 +69,13 @@
       "status": "if you wanna be fast af",
       "date": "2026-03-28",
       "notes": "only on desktop, set short cuts for example for 'save annot' in the config panel."
+    },
+    {
+      "type": "bug",
+      "description": "dark mode colors",
+      "status": "making things Honelle's problem :D",
+      "date": "2026-03-28",
+      "notes": "I just assigned some colors and switched the theme colors around so this is definitely not great yet. Honelle said she would pick some good colors for me! Isn't it awesome to have such cool friends who take part in my random projects?"
     }
   ]
 }

@@ -33,7 +33,7 @@
 
                         <div class="level2-card tabbed-card">
 
-                            <!-- Desktop dropdown (hidden on smaller screens)-->
+                            <!-- Desktop dropdown -->
                             <div class="tab-header">
                                 <button class="tab-button active" onclick="switchTab(event, 'tab-html')">
                                     HTML File Setup
@@ -46,7 +46,7 @@
                                 </button>
                             </div>
 
-                            <!-- Mobile dropdown (only visible on small screens) -->
+                            <!-- Mobile dropdown -->
                             <div class="tab-dropdown">
                                 <select onchange="switchTabSelect(this)">
                                     <option value="tab-html">HTML file to annotate</option>
@@ -59,8 +59,9 @@
                             <div class="tab-content">
 
                                 <div id="tab-html" class="tab-pane active">
-                                    <p>Select an HTML file from your device. Your annotations will be saved directly
-                                        into that file.</p>
+                                    <p>Pick an HTML file from your device. Any annotations you make will be saved right
+                                        into that file. The tool doesn’t store or upload anything, everything stays on
+                                        your local device.</p>
                                     <div class="preview-plus-button">
                                         <div class="container-file-preview">
                                             <div class="file-preview" id="HTMLFile">
@@ -148,7 +149,6 @@
     <script src="js/layout.js"></script>
     <script src="js/loadAnnotPreview.js"></script>
     <script src="js/loadComponents.js"></script>
-    <script src="js/loadPlaceholderPreview.js"></script>
     <script src="js/theme.js"></script>
     <script src="js/toast.js"></script>
 
