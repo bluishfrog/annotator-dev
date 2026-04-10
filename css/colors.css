@@ -56,12 +56,12 @@
 [data-theme="dark"] {
 
     /* ---------- Neutrals  ---------- */
-    --color-bg: #0B0B14;
-    --color-surface: #12122A;
-    --color-text: #EDEDF5;
+    --color-bg: #121212;
+    --color-surface: #333333;
+    --color-text: #FFFFFF;
     --color-text-dark: #FFFFFF;
-    --color-text-muted: #B3B3C6;
-    --color-text-faint: #7D7D95;
+    --color-text-muted: #EEEEEE;
+    --color-text-faint: #BBBBBB;
 
     /* ---------- Brand ---------- */
     --color-primary: #C9F2FF;
@@ -69,30 +69,29 @@
     --color-primary-fade: #C9F2FF80;
 
     /* ---------- Accent ---------- */
-    --color-accent: #33337C;
-    --color-accent-hover: #33337C80;
-    --color-accent-soft: #33337C14;
+    --color-accent: #5858cf;
+    --color-accent-hover: #4a4ad1;
+    --color-accent-soft: #5858cf80;
 
     /* ---------- Borders ---------- */
-    --color-border: #26264A;
-    --color-border-light: #1B1B36;
-    --color-border-accent: #3A3A7A;
+    --color-border: #BBBBBB;
+    --color-border-light: #CCCCCC;
+    --color-border-accent: #5858cf;
 
     /* ---------- UI Greys ---------- */
     --color-grey-100: #14142A;
     --color-grey-200: #1B1B36;
-    --color-grey-300: #232348;
+    --color-grey-300: #807c7c;
 
     /* ---------- States ---------- */
-    --color-success: #2F7A4B;
+    --color-success: #045e25;
     --color-success-text: #B6E9C5;
-    --color-warning: #aa3333;
-    ;
+    --color-warning: #c93d3d;
     --color-warning-text: #FFB3B3;
     --color-error: #FFD6D6;
 
     /* ---------- Code ---------- */
-    --color-code-bg: #0F0F22;
+    --color-code-bg: #343434;
     --color-code-text: #EDEDF5;
 
     /* ---------- Shadows ---------- */
