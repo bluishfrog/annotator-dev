@@ -71,11 +71,46 @@
       "notes": "only on desktop, set short cuts for example for 'save annot' in the config panel."
     },
     {
-      "type": "bug",
+      "type": "fix",
       "description": "dark mode colors",
       "status": "making things Honelle's problem :D",
-      "date": "2026-03-28",
-      "notes": "I just assigned some colors and switched the theme colors around so this is definitely not great yet. Honelle said she would pick some good colors for me! Isn't it awesome to have such cool friends who take part in my random projects?"
+      "date": "2026-04-10",
+      "notes": "Honelle picked some nice colors for us :D"
+    },
+    {
+      "type": "bug",
+      "description": "placement popup",
+      "status": "yeah that needs fixing",
+      "date": "2026-04-10",
+      "notes": "both on desktop and mobile, the placement of the popup for writing annotations is not ideal. Change that."
+    },
+    {
+      "type": "bug",
+      "description": "length popup",
+      "status": "wtf",
+      "date": "2026-04-10",
+      "notes": "when you leave a long comment the popup gets super long and stays that long. I assume it's because of how I track the length? But honestly I am not so sure. I am only sure that I need to fix it, yay."
+    },
+    {
+      "type": "bug",
+      "description": "mobile text highlight",
+      "status": "mobile version wants me dead",
+      "date": "2026-04-10",
+      "notes": "when writing in the annotation popup the highlight disappears. The annotation is still assigned to the correct passage but the visual highlight should stay."
+    },
+    {
+      "type": "feature",
+      "description": "delete all annotations",
+      "status": "that should be easy? techncially?",
+      "date": "2026-04-10",
+      "notes": "add button to delete all annotations in an open file"
+    },
+    {
+      "type": "bug",
+      "description": "cursive text",
+      "status": "nested tags are evil",
+      "date": "2026-04-10",
+      "notes": "if you hightlight an area that includes a part of a cursive node but not all of it, it straight up doesn't work... sigh."
     }
   ]
 }
